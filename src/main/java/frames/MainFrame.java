@@ -9,6 +9,7 @@ public class MainFrame {
 
     private static JFrame frame = new JFrame();
     private static Container container = new Container();
+    private static ContentFrame contentPanel = new ContentFrame();
     private static CategorieTree catTree = new CategorieTree();
 
 
@@ -20,6 +21,7 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(1000, 800);
         frame.setVisible(true);
+        frame.setResizable(false);
         container = frame.getContentPane();
         container.setLayout(new BorderLayout());
 
@@ -31,6 +33,7 @@ public class MainFrame {
         createMenuBar();
         createCategorieTree();
         createBottomBar();
+        createContentFrame();
     }
 
     private void createMenuBar() {
@@ -39,7 +42,7 @@ public class MainFrame {
 
 
         //Erstelle newMenu
-        JMenu newMenu = new JMenu("Neu");
+        JMenu newMenu = new JMenu("Bearbeiten");
         JMenuItem createCategorie = new JMenuItem("Kategorie erstellen");
         createCategorie.addActionListener(new MainFrameListener.newCatListener());
         newMenu.add(createCategorie);
@@ -50,8 +53,8 @@ public class MainFrame {
         changeMainPassword.addActionListener(new MainFrameListener.changeMainPassListener());
         newMenu.add(changeMainPassword);
         newMenu.addSeparator();
-        JMenuItem createPassword = new JMenuItem("Passworteintrag erstellen (TODO)");
-        createPassword.addActionListener(new MainFrameListener.newPasListener());
+        JMenuItem createPassword = new JMenuItem("Passworteintrag erstellen");
+        createPassword.addActionListener(new MainFrameListener.newPasListener(false));
         newMenu.add(createPassword);
         JMenuItem editPassword = new JMenuItem("Passworteintrag bearbeiten (TODO)");
         newMenu.add(editPassword);
@@ -68,7 +71,9 @@ public class MainFrame {
         newMenu.add(exit);
 
         //Erstelle viewMenu
-        JMenu viewMenu = new JMenu("Ansicht");
+        JMenu viewMenu = new JMenu("Einstellungen");
+        JMenuItem configPasswordGenerator = new JMenuItem("Passwort Generator konfigurieren");
+        viewMenu.add(configPasswordGenerator);
 
         //Erstelle helpMenu
         JMenu helpMenu = new JMenu("Hilfe");
@@ -86,9 +91,14 @@ public class MainFrame {
     private void createBottomBar() {
         UIManager.put("MenuBar.background", Color.ORANGE);
         JMenuBar bottomBar = new JMenuBar();
-        //JMenu test = new JMenu(" ");
-        //bottomBar.add(test);
+        JMenu test = new JMenu(" ");
+        bottomBar.add(test);
+        bottomBar.add(new JButton("Verbesserungsidee an Marc senden"));
         container.add(bottomBar, BorderLayout.SOUTH);
+    }
+
+    private void createContentFrame() {
+        container.add(contentPanel.getMainPanel(), BorderLayout.CENTER);
     }
 
     public static Frame getFrame() {
@@ -103,6 +113,7 @@ public class MainFrame {
         return catTree;
     }
 
-
-
+    public static ContentFrame getContentPanel() {
+        return contentPanel;
+    }
 }
