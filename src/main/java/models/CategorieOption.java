@@ -2,7 +2,7 @@ package models;
 
 public enum CategorieOption {
 
-    NONE, FINANCE, ADMINISTRATION, INTERNET_MOBILE;
+    NONE, FINANCE, ADMINISTRATION, INTERNET_MOBILE, TRAVEL;
 
     public static String toString(CategorieOption catOption) {
 
@@ -15,6 +15,8 @@ public enum CategorieOption {
                 return "Behörden";
             case INTERNET_MOBILE:
                 return "Internet/Mobile";
+            case TRAVEL:
+                return "Reisen";
             default:
                 return null;
         }
@@ -29,6 +31,8 @@ public enum CategorieOption {
             return ADMINISTRATION;
         } else if ("Internet/Mobile".equals(name)) {
             return INTERNET_MOBILE;
+        } else if ("Reisen".equals(name)) {
+            return TRAVEL;
         }
         return NONE;
     }

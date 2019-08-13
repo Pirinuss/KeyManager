@@ -1,5 +1,6 @@
-package frames;
+package frames.components;
 
+import frames.ContentFrame;
 import listener.ContentFrameListener;
 import listener.MainFrameListener;
 import models.Categorie;
@@ -9,43 +10,26 @@ import util.IconHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.EventObject;
 
+public class CategoriePanel extends JPanel {
 
-public class ContentFrame {
-
-    private static Categorie categorie;
-
-    private static CardLayout layout = new CardLayout();
-    private static JPanel mainPanel = new JPanel();
-    private static JPanel startPanel = new JPanel();
-    private static JPanel categoriePanel = new JPanel();
-    private static JPanel passwordPanel = new JPanel();
+    private Categorie categorie;
 
     private static JTable categorieInfoTable;
     private static JPanel passwordTablePanel;
     private static JPanel categoriePasswordPanel;
 
-    public ContentFrame() {
-
-        mainPanel.setLayout(layout);
-        mainPanel.add(startPanel);
-        mainPanel.add(createCategoriePanel(), "categoriePanel");
-        mainPanel.add(createPasswordPanel(), "passwordPanel");
-
-        JLabel label = new JLabel("test");
-        mainPanel.add(label);
+    public CategoriePanel(Categorie categorie) {
+        this.categorie = categorie;
+        createCategoriePanel();
     }
 
-    private JPanel createCategoriePanel() {
-        categoriePanel.setLayout(new BorderLayout());
+    private void createCategoriePanel() {
+        this.setLayout(new BorderLayout());
 
         passwordTablePanel = new JPanel(new BorderLayout());
         passwordTablePanel.setBackground(Color.LIGHT_GRAY);
@@ -55,8 +39,8 @@ public class ContentFrame {
         passwordTablePanel.add(emptyLabel2, BorderLayout.EAST);
         passwordTablePanel.add(createPasswordTable(), BorderLayout.CENTER);
 
-        categoriePanel.add(createCategorieTable(), BorderLayout.NORTH);
-        categoriePanel.add(passwordTablePanel, BorderLayout.CENTER);
+        this.add(createCategorieTable(), BorderLayout.NORTH);
+        this.add(passwordTablePanel, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.LIGHT_GRAY);
@@ -72,9 +56,8 @@ public class ContentFrame {
         buttonPanel.add(newPasswordButton);
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
-        categoriePanel.add(buttonPanel, BorderLayout.SOUTH);
+        this.add(buttonPanel, BorderLayout.SOUTH);
 
-        return categoriePanel;
     }
 
     private JTable createCategorieTable() {
@@ -242,8 +225,7 @@ public class ContentFrame {
 
         updatePasswordTable();
 
-        layout.show(mainPanel, "categoriePanel");
-        categoriePanel.updateUI();
+        this.updateUI();
     }
 
     public static Object getCategorieTableContent(int row, int column) {
@@ -252,35 +234,6 @@ public class ContentFrame {
 
     public static JTable getCategorieInfoTable() {
         return categorieInfoTable;
-    }
-
-    private JPanel createPasswordPanel() {
-        // TODO
-        return passwordPanel;
-    }
-
-    public static JPanel getMainPanel() {
-        return mainPanel;
-    }
-
-    public static JPanel getCategoriePanel() {
-        return categoriePanel;
-    }
-
-    public static JPanel getPasswordPanel() {
-        return passwordPanel;
-    }
-
-    public static JPanel getStartPanel() {
-        return startPanel;
-    }
-
-    public static CardLayout getLayout() {
-        return layout;
-    }
-
-    public static Categorie getCategorie() {
-        return categorie;
     }
 
     public class TableModel extends DefaultTableModel {
@@ -300,94 +253,6 @@ public class ContentFrame {
         public void setCellEditable(int row, int col, boolean value) {
             this.editable_cells[row][col] = value;
             this.fireTableCellUpdated(row, col);
-        }
-
-    }
-
-    public static class EditCategorieTableRenderer implements TableCellRenderer {
-
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-
-            if (row == 0 && column == 1) {
-                return new JTextField((String) value);
-            }
-
-            if (row == 1 && column == 1) {
-                JComboBox comboBox = new JComboBox(CategorieOption.getAllCatNames());
-                comboBox.setSelectedItem(value);
-                return comboBox;
-            }
-
-            JLabel label = new JLabel((String) value);
-            label.setFont(new Font("Times", Font.BOLD, 20));
-            return label;
-        }
-    }
-
-    public static class SaveCategorieTableRenderer implements TableCellRenderer {
-
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-
-            JLabel label = new JLabel((String) value);
-            label.setFont(new Font("Times", Font.BOLD, 20));
-            return label;
-        }
-    }
-
-    public static class CategorieTableEditor extends AbstractCellEditor implements TableCellEditor {
-
-        Component component;
-        String value;
-
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-
-            if (row == 1 && column == 1) {
-                component = new JComboBox(CategorieOption.getAllCatNames());
-                component.setName("comboBox");
-                JComboBox box = (JComboBox) component;
-                value = box.getSelectedItem();
-                return component;
-            }
-
-            if (row == 0 && column == 1) {
-                component = new JTextField((String) value);
-                component.setName("textField");
-                JTextField field = (JTextField) component;
-                value = field.getText();
-                return component;
-            }
-
-            return new JTextField((String) value);
-
-        }
-
-        public Object getCellEditorValue() {
-            return value;
-        }
-
-        public boolean isCellEditable(EventObject anEvent) {
-            return true;
-        }
-
-        public boolean shouldSelectCell(EventObject anEvent) {
-            return true;
-        }
-
-        public boolean stopCellEditing() {
-            if (component.getName().equals("comboBox")) {
-                JComboBox comboBox = (JComboBox) component;
-                value = (String) comboBox.getSelectedItem();
-            } else {
-                JTextField textField = (JTextField) component;
-                value = textField.getText();
-            }
-            super.stopCellEditing();
-            return true;
-        }
-
-        @Override
-        public void cancelCellEditing() {
-            stopCellEditing();
         }
 
     }

@@ -6,16 +6,13 @@ import frames.MainFrame;
 import models.Categorie;
 import models.CategorieOption;
 import models.PasswordEntity;
+import util.IconHandler;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -24,10 +21,9 @@ public class MainFrameListener {
 
     private static Frame frame = MainFrame.getFrame();
     private static Container container = MainFrame.getContainer();
-    private static CategorieTree catTree = MainFrame.getCatTree();
+    private static CategorieTree catTree;
 
     private static ImageIcon trashCanIcon = new ImageIcon("src/main/resources/TrashCanIcon.png");
-    private static ImageIcon addIcon = new ImageIcon("src/main/resources/AddIcon.png");
 
     public static class newCatListener implements ActionListener {
 
@@ -42,6 +38,8 @@ public class MainFrameListener {
         private boolean create = false;
 
         public void actionPerformed(ActionEvent arg0) {
+
+            catTree = MainFrame.getCatTree();
 
             dialog = new JDialog();
             dialog.setTitle("Kategorie erstellen");
@@ -103,7 +101,7 @@ public class MainFrameListener {
             buttonPanel.add(okayButton);
             contentPanel.add(buttonPanel);
 
-            mainPanel.add(getIconPanel("AddIcon.png", 200,150));
+            mainPanel.add(IconHandler.getIconPanel("AddIcon.png", 200,150));
             mainPanel.add(contentPanel);
 
             return mainPanel;
@@ -308,7 +306,7 @@ public class MainFrameListener {
             buttonPanel.add(createButton);
             contentPanel.add(buttonPanel);
 
-            mainPanel.add(getIconPanel("AddIcon.png", 200, 300));
+            mainPanel.add(IconHandler.getIconPanel("AddIcon.png", 200, 300));
             mainPanel.add(contentPanel);
 
             return mainPanel;
@@ -387,7 +385,7 @@ public class MainFrameListener {
                     }
                 }
                 DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(passwordEntity);
-                model.insertNodeInto(newNode, (DefaultMutableTreeNode) root.getChildAt(index), root.getChildAt(0).getChildCount());
+                model.insertNodeInto(newNode, (DefaultMutableTreeNode) root.getChildAt(index), root.getChildAt(index).getChildCount());
 
                 MainFrame.getContentPanel().updateCategoriePanel(categorie);
                 MainFrame.getCatTree().getTree().updateUI();
@@ -424,25 +422,6 @@ public class MainFrameListener {
             System.exit(0);
         }
 
-    }
-
-    private static JPanel getIconPanel(String iconName, int width, int height) {
-
-        JPanel iconPanel = new JPanel();
-        iconPanel.setLayout(new BorderLayout());
-        iconPanel.setPreferredSize(new Dimension(width, height));
-        String path = "src/main/resources/" + iconName;
-
-        BufferedImage myPicture = null;
-
-        try {
-            myPicture = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-        iconPanel.add(picLabel, BorderLayout.CENTER);
-        return iconPanel;
     }
 
 }

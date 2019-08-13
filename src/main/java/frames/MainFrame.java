@@ -34,6 +34,8 @@ public class MainFrame {
         createCategorieTree();
         createBottomBar();
         createContentFrame();
+        //frame.pack();
+        frame.validate();
     }
 
     private void createMenuBar() {
@@ -85,6 +87,7 @@ public class MainFrame {
     }
 
     private void createCategorieTree() {
+        catTree.getTree().setBorder(BorderFactory.createLineBorder(Color.BLACK));
         container.add(catTree.getTree(), BorderLayout.WEST);
     }
 
@@ -98,6 +101,7 @@ public class MainFrame {
     }
 
     private void createContentFrame() {
+        contentPanel.getMainPanel().setBorder(BorderFactory.createLineBorder(Color.BLACK));
         container.add(contentPanel.getMainPanel(), BorderLayout.CENTER);
     }
 

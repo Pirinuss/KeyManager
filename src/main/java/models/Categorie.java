@@ -35,6 +35,10 @@ public class Categorie {
         passwords.add(password);
     }
 
+    public void removePassword(PasswordEntity password) {
+        passwords.remove(password);
+    }
+
     public int getId() {
         return id;
     }

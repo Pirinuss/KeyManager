@@ -4,18 +4,22 @@ import frames.ContentFrame;
 import frames.MainFrame;
 import models.Categorie;
 import models.CategorieOption;
+import models.PasswordEntity;
 
 import javax.swing.*;
+import javax.swing.text.Position;
+import javax.swing.tree.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ContentFrameListener {
 
-    public static class editCategorieTableListener implements ActionListener {
+    public static class EditCategorieTableListener implements ActionListener {
 
         private JButton editButton;
 
-        public editCategorieTableListener(JButton button) {
+        public EditCategorieTableListener(JButton button) {
             this.editButton = button;
         }
 
@@ -33,16 +37,26 @@ public class ContentFrameListener {
 
             editButton.setText("Speichern");
             editButton.removeActionListener(editButton.getActionListeners()[0]);
-            editButton.addActionListener(new saveCategorieTableListener(editButton));
+            editButton.addActionListener(new SaveCategorieTableListener(editButton));
+
+            JPanel buttonPanel = (JPanel) ContentFrame.getCategoriePanel().getComponent(2);
+            Component[] components = buttonPanel.getComponents();
+            for (Component component : components) {
+                if (component.getName() != null) {
+                    if (component.getName().equals("newPasswordButton") || component.getName().equals("deleteButton")) {
+                        component.setVisible(false);
+                    }
+                }
+            }
 
         }
     }
 
-    public static class saveCategorieTableListener implements  ActionListener {
+    public static class SaveCategorieTableListener implements  ActionListener {
 
         private JButton saveButton;
 
-        public saveCategorieTableListener(JButton editButton) {
+        public SaveCategorieTableListener(JButton editButton) {
             this.saveButton = editButton;
         }
 
@@ -71,10 +85,69 @@ public class ContentFrameListener {
 
             ContentFrame.getCategorieInfoTable().updateUI();
 
-
             saveButton.setText("Bearbeiten");
             saveButton.removeActionListener(saveButton.getActionListeners()[0]);
-            saveButton.addActionListener(new editCategorieTableListener(saveButton));
+            saveButton.addActionListener(new EditCategorieTableListener(saveButton));
+
+            JPanel buttonPanel = (JPanel) ContentFrame.getCategoriePanel().getComponent(2);
+            Component[] components = buttonPanel.getComponents();
+            for (Component component : components) {
+                if (component.getName() != null) {
+                    if (component.getName().equals("newPasswordButton") || component.getName().equals("deleteButton")) {
+                        component.setVisible(true);
+                    }
+                }
+            }
+        }
+    }
+
+    public static class DeletePasswordListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+
+            // Confirmation
+            String[] options = {"Ja", "Nein"};
+            int option = JOptionPane.showOptionDialog(MainFrame.getFrame(),
+                    "Soll der Eintrag wirklich gelöscht werden?",
+                    "Achtung!", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.WARNING_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+
+            if (option == 1) {
+                return;
+            }
+
+            Categorie currentCategorie = MainFrame.getContentPanel().getCategorie();
+            JButton activeButton = (JButton) e.getSource();
+            int passwordIndex = Integer.valueOf(activeButton.getName());
+            PasswordEntity selectedPassword = currentCategorie.getPasswords().get(passwordIndex);
+
+            currentCategorie.removePassword(selectedPassword);
+            MainFrame.getContentPanel().updateCategoriePanel(currentCategorie);
+
+            JTree tree = MainFrame.getCatTree().getTree();
+            DefaultTreeModel treeModel = (DefaultTreeModel) tree.getModel();
+
+            TreePath path = tree.getNextMatch(currentCategorie.getName(), 0, Position.Bias.Forward);
+            DefaultMutableTreeNode deleteNode = (DefaultMutableTreeNode) path.getLastPathComponent();
+            if (deleteNode.getChildCount() != 0) {
+                for (int i=0; i<deleteNode.getChildCount(); i++) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) deleteNode.getChildAt(i);
+                    PasswordEntity passwordEntity = (PasswordEntity) node.getUserObject();
+                    if (passwordEntity.getTitle().equals(selectedPassword.getTitle())) {
+                        treeModel.removeNodeFromParent(node);
+                    }
+                }
+            } else {
+                treeModel.removeNodeFromParent(deleteNode);
+            }
+
+            treeModel.reload();
+            tree.expandPath(tree.getNextMatch(currentCategorie.getName(),0, Position.Bias.Forward));
+            tree.updateUI();
+
         }
     }
 
