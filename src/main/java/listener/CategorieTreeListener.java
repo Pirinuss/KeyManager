@@ -39,8 +39,8 @@ public class CategorieTreeListener implements TreeSelectionListener {
         MainFrame.getContentPanel().updateCategoriePanel(categorie);
     }
 
-    private void clickOnPassword(PasswordEntity userObject) {
-        ContentFrame.getLayout().show(ContentFrame.getMainPanel(), "passwordPanel");
+    private void clickOnPassword(PasswordEntity password) {
+        MainFrame.getContentPanel().updatePasswordPanel(password);
     }
 
 }

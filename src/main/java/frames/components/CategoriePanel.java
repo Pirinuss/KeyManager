@@ -1,47 +1,70 @@
 package frames.components;
 
-import frames.ContentFrame;
 import listener.ContentFrameListener;
 import listener.MainFrameListener;
 import models.Categorie;
 import models.CategorieOption;
 import models.PasswordEntity;
 import util.IconHandler;
+import util.LoggerUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.EventObject;
+import java.util.logging.*;
+
 
 public class CategoriePanel extends JPanel {
+
+    private static Logger logger = LoggerUtil.getLogger();
 
     private Categorie categorie;
 
     private static JTable categorieInfoTable;
+    private static JPanel debugPanel;
     private static JPanel passwordTablePanel;
     private static JPanel categoriePasswordPanel;
 
+    private boolean showPasswords;
+    private String lockIconName;
+
     public CategoriePanel(Categorie categorie) {
+
         this.categorie = categorie;
+        showPasswords = false;
+        lockIconName = "LockIcon1.png";
         createCategoriePanel();
     }
 
     private void createCategoriePanel() {
         this.setLayout(new BorderLayout());
 
+        // Debug Panel
+        debugPanel = new JPanel(new GridBagLayout());
+        debugPanel.setBackground(Color.LIGHT_GRAY);
+        debugPanel.setPreferredSize(new Dimension(40,50));
+        JLabel debugInfo = new JLabel(" ");
+        debugInfo.setName("debugInfo");
+        debugInfo.setForeground(Color.RED);
+        debugPanel.add(debugInfo);
+
+        // Password Table
         passwordTablePanel = new JPanel(new BorderLayout());
         passwordTablePanel.setBackground(Color.LIGHT_GRAY);
-        JLabel emptyLabel1 = new JLabel("                          ");
-        JLabel emptyLabel2 = new JLabel("             ");
+        JLabel emptyLabel1 = new JLabel("          ");
+        JLabel emptyLabel2 = new JLabel("          ");
         passwordTablePanel.add(emptyLabel1, BorderLayout.WEST);
         passwordTablePanel.add(emptyLabel2, BorderLayout.EAST);
         passwordTablePanel.add(createPasswordTable(), BorderLayout.CENTER);
+        passwordTablePanel.add(debugPanel, BorderLayout.NORTH);
 
-        this.add(createCategorieTable(), BorderLayout.NORTH);
-        this.add(passwordTablePanel, BorderLayout.CENTER);
-
+        // Button Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.LIGHT_GRAY);
         JButton newPasswordButton = new JButton("Password hinzufügen");
@@ -56,8 +79,16 @@ public class CategoriePanel extends JPanel {
         buttonPanel.add(newPasswordButton);
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
+
+        this.add(createCategorieTable(), BorderLayout.NORTH);
+        this.add(passwordTablePanel, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.SOUTH);
 
+    }
+
+    public void setDebugInfo(String message, int displayDuration, Color color) {
+        Thread displayDebugThread = new Thread(new DebugThread(message, displayDuration, color));
+        displayDebugThread.start();
     }
 
     private JTable createCategorieTable() {
@@ -102,7 +133,7 @@ public class CategoriePanel extends JPanel {
 
         GridLayout layout = new GridLayout(Categorie.getMaxpasswordsAmount(), 6);
 
-        categoriePasswordPanel = new JPanel(new GridLayout(Categorie.getMaxpasswordsAmount(), 6));
+        categoriePasswordPanel = new JPanel(layout);
         categoriePasswordPanel.setBackground(Color.LIGHT_GRAY);
         setCategoriePasswordPanelHeader();
 
@@ -126,19 +157,21 @@ public class CategoriePanel extends JPanel {
             password.setBackground(Color.LIGHT_GRAY);
             password.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
             password.setEditable(false);
-            password.putClientProperty("JPasswordField.cutCopyAllowed", true);
-            password.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    password.setEchoChar((char)0);
-                }
+            if (showPasswords) {
+                password.putClientProperty("JPasswordField.cutCopyAllowed", true);
+                password.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        password.setEchoChar((char)0);
+                    }
 
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    int dotUnicode = 9679;
-                    password.setEchoChar((char) dotUnicode);
-                }
-            });
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        int dotUnicode = 9679;
+                        password.setEchoChar((char) dotUnicode);
+                    }
+                });
+            }
 
             // URL
             JTextField url = new JTextField(passwords.get(i).getUrl());
@@ -153,12 +186,14 @@ public class CategoriePanel extends JPanel {
             info.setSelectionColor(Color.LIGHT_GRAY);
             info.setEditable(false);
             info.setBackground(Color.LIGHT_GRAY);
+            JScrollPane scrollPane = new JScrollPane(info, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
             // Buttons
             JPanel buttonPanel = new JPanel();
             buttonPanel.setName("buttonPanel");
             buttonPanel.setBackground(Color.LIGHT_GRAY);
             JButton editButton = new JButton(IconHandler.getIcon("EditIcon.png", 15, 12));
+            editButton.addActionListener(new ContentFrameListener.EditPasswordListener());
             JButton deleteButton = new JButton(IconHandler.getIcon("TrashCanIcon.png", 15,12));
             deleteButton.setName(String.valueOf(i));
             deleteButton.addActionListener(new ContentFrameListener.DeletePasswordListener());
@@ -169,7 +204,7 @@ public class CategoriePanel extends JPanel {
             categoriePasswordPanel.add(username);
             categoriePasswordPanel.add(password);
             categoriePasswordPanel.add(url);
-            categoriePasswordPanel.add(info);
+            categoriePasswordPanel.add(scrollPane);
             categoriePasswordPanel.add(buttonPanel);
 
             categoriePasswordPanel.validate();
@@ -195,9 +230,17 @@ public class CategoriePanel extends JPanel {
         usernameLabel.setFont(font);
         usernameLabel.setForeground(Color.MAGENTA);
 
+        JPanel passwordPanel = new JPanel();
+        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
+        passwordPanel.setPreferredSize(new Dimension(70,23));
+        passwordPanel.setBackground(Color.LIGHT_GRAY);
+        JButton lockButton = new JButton(IconHandler.getIcon(lockIconName, 15,15));
+        lockButton.addActionListener(new ContentFrameListener.LockPasswords());
         JLabel passwordLabel = new JLabel("Passwort");
         passwordLabel.setFont(font);
         passwordLabel.setForeground(Color.MAGENTA);
+        passwordPanel.add(passwordLabel);
+        passwordPanel.add(lockButton);
 
         JLabel urlLabel = new JLabel("URL");
         urlLabel.setFont(font);
@@ -209,7 +252,7 @@ public class CategoriePanel extends JPanel {
 
         categoriePasswordPanel.add(titleLabel);
         categoriePasswordPanel.add(usernameLabel);
-        categoriePasswordPanel.add(passwordLabel);
+        categoriePasswordPanel.add(passwordPanel);
         categoriePasswordPanel.add(urlLabel);
         categoriePasswordPanel.add(infoLabel);
         categoriePasswordPanel.add(new JLabel(" "));
@@ -236,11 +279,27 @@ public class CategoriePanel extends JPanel {
         return categorieInfoTable;
     }
 
-    public class TableModel extends DefaultTableModel {
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public boolean isShowPasswords() {
+        return showPasswords;
+    }
+
+    public void setShowPasswords(boolean showPasswords) {
+        this.showPasswords = showPasswords;
+    }
+
+    public void setLockIconName(String lockIconName) {
+        this.lockIconName = lockIconName;
+    }
+
+    public static class TableModel extends DefaultTableModel {
 
         private boolean[][] editable_cells;
 
-        private TableModel(int rows, int cols) {
+        public TableModel(int rows, int cols) {
             super(rows, cols);
             this.editable_cells = new boolean[rows][cols];
         }
@@ -255,6 +314,128 @@ public class CategoriePanel extends JPanel {
             this.fireTableCellUpdated(row, col);
         }
 
+    }
+
+    public static class EditCategorieTableRenderer implements TableCellRenderer {
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+            if (row == 0 && column == 1) {
+                return new JTextField((String) value);
+            }
+
+            if (row == 1 && column == 1) {
+                JComboBox comboBox = new JComboBox(CategorieOption.getAllCatNames());
+                comboBox.setSelectedItem(value);
+                return comboBox;
+            }
+
+            JLabel label = new JLabel((String) value);
+            label.setFont(new Font("Times", Font.BOLD, 20));
+            return label;
+        }
+    }
+
+    public static class SaveCategorieTableRenderer implements TableCellRenderer {
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+            JLabel label = new JLabel((String) value);
+            label.setFont(new Font("Times", Font.BOLD, 20));
+            return label;
+        }
+    }
+
+    public static class CategorieTableEditor extends AbstractCellEditor implements TableCellEditor {
+
+        Component component;
+        String value;
+
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+
+            if (row == 1 && column == 1) {
+                component = new JComboBox(CategorieOption.getAllCatNames());
+                component.setName("comboBox");
+                JComboBox box = (JComboBox) component;
+                value = box.getSelectedItem();
+                return component;
+            }
+
+            if (row == 0 && column == 1) {
+                component = new JTextField((String) value);
+                component.setName("textField");
+                JTextField field = (JTextField) component;
+                value = field.getText();
+                return component;
+            }
+
+            return new JTextField((String) value);
+
+        }
+
+        public Object getCellEditorValue() {
+            return value;
+        }
+
+        public boolean isCellEditable(EventObject anEvent) {
+            return true;
+        }
+
+        public boolean shouldSelectCell(EventObject anEvent) {
+            return true;
+        }
+
+        public boolean stopCellEditing() {
+            if (component.getName().equals("comboBox")) {
+                JComboBox comboBox = (JComboBox) component;
+                value = (String) comboBox.getSelectedItem();
+            } else {
+                JTextField textField = (JTextField) component;
+                value = textField.getText();
+            }
+            super.stopCellEditing();
+            return true;
+        }
+
+        @Override
+        public void cancelCellEditing() {
+            stopCellEditing();
+        }
+
+    }
+
+    private static class DebugThread implements Runnable {
+
+        private String message;
+        private int displayDuration;
+        private Color color;
+
+        public DebugThread(String message, int displayDuration, Color color) {
+            this.message = message;
+            this.displayDuration = displayDuration;
+            this.color = color;
+        }
+
+        public void run() {
+
+            JLabel debugInfo = (JLabel) debugPanel.getComponent(0);
+            if (!debugInfo.getText().equals(" ")) {
+                debugPanel.remove(debugInfo);
+                debugInfo = new JLabel(message);
+                debugPanel.add(debugInfo);
+                debugPanel.updateUI();
+            }
+
+            long time = System.currentTimeMillis();
+
+            debugInfo.setForeground(color);
+            while ((time+displayDuration) > System.currentTimeMillis()) {
+                debugInfo.setText(message);
+            }
+
+            debugInfo.setForeground(Color.BLACK);
+            debugInfo.setText(" ");
+        }
     }
 
 }

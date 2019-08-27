@@ -1,5 +1,6 @@
 package frames;
 
+import frames.components.CategorieTree;
 import listener.MainFrameListener;
 
 import javax.swing.*;
@@ -19,9 +20,9 @@ public class MainFrame {
 
     private void buildFrame() {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(1000, 800);
+        frame.setSize(1400, 800);
         frame.setVisible(true);
-        frame.setResizable(false);
+        frame.setResizable(true);
         container = frame.getContentPane();
         container.setLayout(new BorderLayout());
 
@@ -79,6 +80,9 @@ public class MainFrame {
 
         //Erstelle helpMenu
         JMenu helpMenu = new JMenu("Hilfe");
+        JMenuItem showLog = new JMenuItem("Log-Datei anzeigen");
+        showLog.addActionListener(new MainFrameListener.showLogListener());
+        helpMenu.add(showLog);
 
         menuBar.add(newMenu);
         menuBar.add(viewMenu);

@@ -1,23 +1,32 @@
 package listener;
 
-import frames.CategorieTree;
+import frames.components.CategorieTree;
 import frames.ContentFrame;
 import frames.MainFrame;
 import models.Categorie;
 import models.CategorieOption;
 import models.PasswordEntity;
 import util.IconHandler;
+import util.LoggerUtil;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javax.swing.*;
+import javax.swing.text.Position;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 public class MainFrameListener {
+
+    private static Logger logger = LoggerUtil.getLogger();
 
     private static Frame frame = MainFrame.getFrame();
     private static Container container = MainFrame.getContainer();
@@ -57,6 +66,9 @@ public class MainFrameListener {
                 categorie.setCatOption(categorieOption);
                 categorie.setId((int)System.currentTimeMillis());
                 catTree.addCategorie(categorie, categorie.getId());
+                JTree tree = catTree.getTree();
+                tree.expandPath(tree.getNextMatch(categorie.getName(),0, Position.Bias.Forward));
+                logger.info("Kategorie angelegt: Name: " + newCatName.getText() + ", Bereich: " + CategorieOption.toString(categorieOption));
             }
         }
 
@@ -160,12 +172,9 @@ public class MainFrameListener {
             if (catName == null) {
                 return;
             }
-            for (int i = 0; i<catTree.getCatNames().size(); i++) {
-                if (catName.equals(possibilities[i])) {
-                    catTree.removeCategorie(i);
-                }
-            }
+
             MainFrame.getCatTree().removeCategorie(catName);
+            logger.info("Kategorie mit Namen " + catName +" gelöscht");
 
             ContentFrame.getLayout().first(ContentFrame.getMainPanel());
 
@@ -230,7 +239,7 @@ public class MainFrameListener {
             JLabel chooseCat = new JLabel("Kategorie:");
             chooseCatPanel.add(chooseCat);
             if (catIsKnown) {
-                categorieLabel = new JLabel(ContentFrame.getCategorie().getName());
+                categorieLabel = new JLabel(ContentFrame.getCategoriePanel().getCategorie().getName());
                 chooseCatPanel.add(categorieLabel);
             } else {
                 chooseCatBox = new JComboBox(MainFrame.getCatTree().getCatNames().toArray());
@@ -389,6 +398,14 @@ public class MainFrameListener {
 
                 MainFrame.getContentPanel().updateCategoriePanel(categorie);
                 MainFrame.getCatTree().getTree().updateUI();
+
+                ContentFrame.getCategoriePanel().setDebugInfo("Neuer Passworteintrag angelegt!", 7000, Color.GREEN.darker());
+                logger.info("Neuer Passworteintrag für Kategorie " + categorieName
+                        + " angelegt:   Titel: " + passwordEntity.getTitle()
+                        + ",  Nutzername: " + passwordEntity.getUserName()
+                        + ", Passwortlänge: " + passwordEntity.getPassword().length()
+                        + ", URL: " + passwordEntity.getUrl()
+                        + ", Info: " + passwordEntity.getInfo());
             }
         }
     }
@@ -396,6 +413,7 @@ public class MainFrameListener {
     public static class changeMainPassListener implements ActionListener {
 
         public void actionPerformed(ActionEvent arg0) {
+
             JDialog newMainPas = new JDialog(frame, "Neues Masterpasswort");
             newMainPas.setVisible(true);
             newMainPas.setSize(500,500);
@@ -422,6 +440,36 @@ public class MainFrameListener {
             System.exit(0);
         }
 
+    }
+
+    public static class showLogListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+
+            JPanel logPanel = new JPanel();
+            logPanel.setLayout(new BoxLayout(logPanel, BoxLayout.Y_AXIS));
+
+            try {
+                FileReader fileReader = new FileReader("log.txt");
+                BufferedReader br = new BufferedReader(fileReader);
+
+                String currentLine = "";
+
+                while ((currentLine = br.readLine()) != null) {
+                    JLabel contentLabel = new JLabel(currentLine);
+                    logPanel.add(contentLabel);
+                }
+
+                br.close();
+            } catch (FileNotFoundException ex) {
+                logPanel.add(new JLabel("Keine Log-Datei gefunden!"));
+            } catch (IOException ex) {
+                logPanel.add(new JLabel("Fehler! Hier ist etwas schiefgelaufen..."));
+            }
+
+            MainFrame.getContentPanel().showLogPanel(new JScrollPane(logPanel));
+
+        }
     }
 
 }

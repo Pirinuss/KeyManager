@@ -1,4 +1,4 @@
-package frames;
+package frames.components;
 
 import listener.CategorieTreeListener;
 import models.Categorie;
@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
+import javax.swing.tree.*;
 
 public class CategorieTree {
 
@@ -19,7 +16,7 @@ public class CategorieTree {
     private DefaultMutableTreeNode root;
     private HashMap<Integer, Categorie> categories = new HashMap<Integer, Categorie>();
 
-    CategorieTree() {
+    public CategorieTree() {
         root = new DefaultMutableTreeNode("Kategorien");
         tree = new JTree(root);
         tree.addTreeSelectionListener(new CategorieTreeListener());
@@ -46,19 +43,20 @@ public class CategorieTree {
         model.reload();
     }
 
-    public void removeCategorie (String name) {
+    public void removeCategorie(String removeCategorieName) {
 
-        for (Categorie categorie : categories.values()) {
-            if (categorie.getName().equals(name)) {
-                categories.remove(categorie.getId());
+        Categorie removeCategorie = getCategorieByName(removeCategorieName);
+
+        for (int i=0; i<root.getChildCount(); i++) {
+            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) root.getChildAt(i);
+            Categorie currentCategorie = (Categorie) currentNode.getUserObject();
+            if (currentCategorie.getName().equals(removeCategorieName)) {
+                root.remove(currentNode);
             }
         }
-    }
-
-    public void removeCategorie(int childIndex) {
-        root.remove(childIndex);
-        categories.remove(childIndex);
         tree.updateUI();
+
+        categories.remove(removeCategorie.getId());
     }
 
     public Categorie getCategorieById(int id) {

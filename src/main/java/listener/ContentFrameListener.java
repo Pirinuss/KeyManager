@@ -2,9 +2,11 @@ package listener;
 
 import frames.ContentFrame;
 import frames.MainFrame;
+import frames.components.CategoriePanel;
 import models.Categorie;
 import models.CategorieOption;
 import models.PasswordEntity;
+import util.IconHandler;
 
 import javax.swing.*;
 import javax.swing.text.Position;
@@ -25,13 +27,13 @@ public class ContentFrameListener {
 
         public void actionPerformed(ActionEvent e) {
 
-            JTable table = ContentFrame.getCategorieInfoTable();
+            JTable table = ContentFrame.getCategoriePanel().getCategorieInfoTable();
 
-            table.setDefaultRenderer(Object.class, new ContentFrame.EditCategorieTableRenderer());
-            table.setDefaultEditor(Object.class, new ContentFrame.CategorieTableEditor());
+            table.setDefaultRenderer(Object.class, new CategoriePanel.EditCategorieTableRenderer());
+            table.setDefaultEditor(Object.class, new CategoriePanel.CategorieTableEditor());
             table.updateUI();
 
-            ContentFrame.TableModel model = (ContentFrame.TableModel) table.getModel();
+            CategoriePanel.TableModel model = (CategoriePanel.TableModel) table.getModel();
             model.setCellEditable(0,1, true);
             model.setCellEditable(1,1, true);
 
@@ -62,15 +64,15 @@ public class ContentFrameListener {
 
         public void actionPerformed(ActionEvent e) {
 
-            if (ContentFrame.getCategorieInfoTable().getCellEditor() != null) {
-                ContentFrame.getCategorieInfoTable().getCellEditor().stopCellEditing();
+            if (CategoriePanel.getCategorieInfoTable().getCellEditor() != null) {
+                CategoriePanel.getCategorieInfoTable().getCellEditor().stopCellEditing();
             }
-            ContentFrame.getCategorieInfoTable().setDefaultRenderer(Object.class, new ContentFrame.SaveCategorieTableRenderer());
-            ContentFrame.getCategorieInfoTable().updateUI();
+            CategoriePanel.getCategorieInfoTable().setDefaultRenderer(Object.class, new CategoriePanel.SaveCategorieTableRenderer());
+            CategoriePanel.getCategorieInfoTable().updateUI();
 
-            Categorie categorie = MainFrame.getCatTree().getCategorieById(ContentFrame.getCategorie().getId());
-            categorie.setName((String) ContentFrame.getCategorieTableContent(0,1));
-            categorie.setCatOption((CategorieOption.fromString((String) ContentFrame.getCategorieTableContent(1,1))));
+            Categorie categorie = MainFrame.getCatTree().getCategorieById(ContentFrame.getCategoriePanel().getCategorie().getId());
+            categorie.setName((String) CategoriePanel.getCategorieTableContent(0,1));
+            categorie.setCatOption((CategorieOption.fromString((String) CategoriePanel.getCategorieTableContent(1,1))));
 
             if (categorie.getName().equals("")) {
                 JOptionPane.showMessageDialog(MainFrame.getContentPanel().getCategoriePanel(), "Bitte einen gültigen Namen für die Kategorie eingeben", "Fehler!", JOptionPane.WARNING_MESSAGE);
@@ -79,11 +81,11 @@ public class ContentFrameListener {
 
             MainFrame.getCatTree().getTree().updateUI();
             for (int i=0; i<2; i++) {
-                ContentFrame.TableModel model = (ContentFrame.TableModel) ContentFrame.getCategorieInfoTable().getModel();
+                CategoriePanel.TableModel model = (CategoriePanel.TableModel) CategoriePanel.getCategorieInfoTable().getModel();
                 model.setCellEditable(i,1, false);
             }
 
-            ContentFrame.getCategorieInfoTable().updateUI();
+            CategoriePanel.getCategorieInfoTable().updateUI();
 
             saveButton.setText("Bearbeiten");
             saveButton.removeActionListener(saveButton.getActionListeners()[0]);
@@ -98,6 +100,8 @@ public class ContentFrameListener {
                     }
                 }
             }
+
+            ContentFrame.getCategoriePanel().setDebugInfo("Kategorie erfolgreich editiert!", 5000, Color.GREEN.darker());
         }
     }
 
@@ -119,7 +123,7 @@ public class ContentFrameListener {
                 return;
             }
 
-            Categorie currentCategorie = MainFrame.getContentPanel().getCategorie();
+            Categorie currentCategorie = MainFrame.getContentPanel().getCategoriePanel().getCategorie();
             JButton activeButton = (JButton) e.getSource();
             int passwordIndex = Integer.valueOf(activeButton.getName());
             PasswordEntity selectedPassword = currentCategorie.getPasswords().get(passwordIndex);
@@ -148,7 +152,33 @@ public class ContentFrameListener {
             tree.expandPath(tree.getNextMatch(currentCategorie.getName(),0, Position.Bias.Forward));
             tree.updateUI();
 
+            ContentFrame.getCategoriePanel().setDebugInfo("Passworteintrag erfolgreich gelöscht!", 5000, Color.GREEN.darker());
         }
     }
 
+    public static class EditPasswordListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            ContentFrame.getCategoriePanel().setDebugInfo("Funktion noch nicht implementiert!", 3000, Color.RED);
+        }
+    }
+
+    public static class LockPasswords implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+
+            CategoriePanel categoriePanel = MainFrame.getContentPanel().getCategoriePanel();
+
+            if (categoriePanel.isShowPasswords()) {
+                categoriePanel.setLockIconName("LockIcon1.png");
+                categoriePanel.setShowPasswords(false);
+            } else {
+                categoriePanel.setLockIconName("UnlockIcon1.png");
+                categoriePanel.setShowPasswords(true);
+            }
+
+            Categorie categorie = MainFrame.getContentPanel().getCategoriePanel().getCategorie();
+            MainFrame.getContentPanel().updateCategoriePanel(categorie);
+        }
+    }
 }

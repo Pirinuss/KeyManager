@@ -1,0 +1,8 @@
+[2019-08-27 14:39:22] [INFO   ] Start logging 
+[2019-08-27 14:39:34] [INFO   ] Kategorie angelegt: Name: test, Bereich: --Ohne Bereich-- 
+[2019-08-27 14:39:51] [INFO   ] Neuer Passworteintrag für Kategorie test angelegt:   Titel: test,  Nutzername: test, Passwortlänge: 4, URL: test, Info: sdadkflsa l	dsalödfjalö		ksldfjasöldf
+	klfdsjalöfalfdj	
+
+			dsafafdsadf
+asdfasfd
+sdfsdf	sfa	 
