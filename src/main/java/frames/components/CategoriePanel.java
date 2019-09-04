@@ -64,6 +64,9 @@ public class CategoriePanel extends JPanel {
         passwordTablePanel.add(createPasswordTable(), BorderLayout.CENTER);
         passwordTablePanel.add(debugPanel, BorderLayout.NORTH);
 
+        // Password Table Versuch 2
+        passwordTablePanel = new
+
         // Button Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.LIGHT_GRAY);
@@ -186,7 +189,11 @@ public class CategoriePanel extends JPanel {
             info.setSelectionColor(Color.LIGHT_GRAY);
             info.setEditable(false);
             info.setBackground(Color.LIGHT_GRAY);
-            JScrollPane scrollPane = new JScrollPane(info, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            JPanel storagePanel = new JPanel();
+            storagePanel.add(info);
+            storagePanel.setBackground(Color.LIGHT_GRAY);
+            JScrollPane scrollPane = new JScrollPane(storagePanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane.setBackground(Color.LIGHT_GRAY);
 
             // Buttons
             JPanel buttonPanel = new JPanel();

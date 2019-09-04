@@ -2,30 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b281aa6-24e8-4df3-9928-8e5b133effa0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/frames/components/PasswordPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/LoggerUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/LockIcon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/UnlockIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frames/components/PasswordGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/listener/PasswordGeneratorListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frames/CategorieTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frames/components/CategorieTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt.lck" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frames/ContentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frames/ContentFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frames/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frames/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frames/components/CategoriePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frames/components/CategoriePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listener/CategorieTreeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listener/CategorieTreeListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/listener/ContentFrameListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listener/ContentFrameListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/listener/MainFrameListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listener/MainFrameListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/Key_Manager.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/frames/CategorieTree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/frames/ContentFrame$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/frames/ContentFrame$CategorieTableEditor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/frames/ContentFrame$EditCategorieTableRenderer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/frames/ContentFrame$SaveCategorieTableRenderer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/frames/ContentFrame$TableModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/frames/ContentFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/frames/ContentFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/frames/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/frames/MainFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/listener/CategorieTreeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/CategorieTreeListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$CategorieTableEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$CategorieTableEditor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$DebugThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$DebugThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$EditCategorieTableRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$EditCategorieTableRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$SaveCategorieTableRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$SaveCategorieTableRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$TableModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel$TableModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/frames/components/CategoriePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener$DeletePasswordListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener$DeletePasswordListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener$EditPasswordListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener$EditPasswordListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener$LockPasswords.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener$LockPasswords.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener$editCategorieTableListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener$editCategorieTableListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener$saveCategorieTableListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener$saveCategorieTableListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/ContentFrameListener.class" afterDir="false" />
@@ -36,7 +32,7 @@
       <change beforePath="$PROJECT_DIR$/target/classes/listener/MainFrameListener$newCatListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/MainFrameListener$newCatListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/listener/MainFrameListener$newPasListener$CreatePasswordButtonListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/MainFrameListener$newPasListener$CreatePasswordButtonListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/listener/MainFrameListener$newPasListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/MainFrameListener$newPasListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/listener/MainFrameListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/MainFrameListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/listener/MainFrameListener$showLogListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/listener/MainFrameListener$showLogListener.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -54,24 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frames/MainFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1410">
-              <caret line="94" column="58" selection-start-line="94" selection-start-column="58" selection-end-line="94" selection-end-column="58" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#383#384#0" expanded="true" />
-                <element signature="e#411#412#0" expanded="true" />
-                <element signature="e#3979#3980#0" expanded="true" />
-                <element signature="e#4014#4015#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/frames/LoginFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="636">
-              <caret line="50" column="55" selection-start-line="50" selection-start-column="55" selection-end-line="50" selection-end-column="55" />
+            <state relative-caret-position="711">
+              <caret line="78" column="101" selection-start-line="78" selection-start-column="101" selection-end-line="78" selection-end-column="101" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,15 +62,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/listener/MainFrameListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="156" selection-start-line="156" selection-end-line="156" />
+            <state relative-caret-position="816">
+              <caret line="496" column="91" selection-start-line="496" selection-start-column="91" selection-end-line="496" selection-end-column="91" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#newCatListener#0;class#MainFrameListener#0" />
                 <element signature="class#createCatButtonListener#0;class#newCatListener#0;class#MainFrameListener#0" />
+                <element signature="class#delCatListener#0;class#MainFrameListener#0" />
                 <element signature="class#newPasListener#0;class#MainFrameListener#0" />
                 <element signature="method#actionPerformed#0;class#newPasListener#0;class#MainFrameListener#0" />
                 <element signature="method#isPossible#0;class#newPasListener#0;class#MainFrameListener#0" />
+                <element signature="class#changeMainPassListener#0;class#MainFrameListener#0" />
                 <element signature="class#exitListener#0;class#MainFrameListener#0" />
               </folding>
             </state>
@@ -100,40 +82,48 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frames/ContentFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+            <state relative-caret-position="891">
+              <caret line="85" column="60" selection-start-line="85" selection-start-column="60" selection-end-line="85" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#10079#10112#1" />
+                <element signature="method#updateCategoriePanel#0;class#ContentFrame#0" />
+                <element signature="method#updatePasswordPanel#0;class#ContentFrame#0" />
+                <element signature="e#1549#1550#0" expanded="true" />
                 <element signature="e#1581#1582#0" expanded="true" />
-                <element signature="e#10159#10197#1" />
+                <element signature="e#1714#1715#0" expanded="true" />
                 <element signature="e#1751#1752#0" expanded="true" />
-                <element signature="e#10243#10280#1" />
+                <element signature="e#1805#1806#0" expanded="true" />
                 <element signature="e#1841#1842#0" expanded="true" />
-                <element signature="e#10400#10430#1" />
+                <element signature="e#1885#1886#0" expanded="true" />
                 <element signature="e#1914#1915#0" expanded="true" />
+                <element signature="e#2381#2382#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frames/components/CategoriePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="193" column="22" lean-forward="true" selection-start-line="193" selection-start-column="22" selection-end-line="193" selection-end-column="22" />
+            <state relative-caret-position="2760">
+              <caret line="186" column="36" selection-start-line="186" selection-start-column="36" selection-end-line="186" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#getCategorieTableContent#0;class#CategoriePanel#0" />
-                <element signature="e#11185#11186#0" expanded="true" />
-                <element signature="e#11256#11257#0" expanded="true" />
-                <element signature="e#11332#11333#0" expanded="true" />
-                <element signature="e#11441#11442#0" expanded="true" />
-                <element signature="e#11545#11546#0" expanded="true" />
-                <element signature="class#TableModel#0;class#CategoriePanel#0" />
+                <element signature="e#11259#11260#0" expanded="true" />
+                <element signature="e#11300#11301#0" expanded="true" />
+                <element signature="e#11339#11340#0" expanded="true" />
+                <element signature="e#11371#11372#0" expanded="true" />
+                <element signature="e#11411#11412#0" expanded="true" />
+                <element signature="e#11447#11448#0" expanded="true" />
+                <element signature="e#11506#11507#0" expanded="true" />
+                <element signature="e#11556#11557#0" expanded="true" />
+                <element signature="e#11612#11613#0" expanded="true" />
+                <element signature="e#11660#11661#0" expanded="true" />
                 <element signature="class#EditCategorieTableRenderer#0;class#CategoriePanel#0" />
                 <element signature="class#SaveCategorieTableRenderer#0;class#CategoriePanel#0" />
                 <element signature="class#CategorieTableEditor#0;class#CategoriePanel#0" />
+                <element signature="class#DebugThread#0;class#CategoriePanel#0" />
               </folding>
             </state>
           </provider>
@@ -142,25 +132,45 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/listener/ContentFrameListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="165" column="64" selection-start-line="165" selection-start-column="64" selection-end-line="165" selection-end-column="64" />
+            <state relative-caret-position="255">
+              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#EditCategorieTableListener#0;class#ContentFrameListener#0" />
-                <element signature="class#SaveCategorieTableListener#0;class#ContentFrameListener#0" />
                 <element signature="class#DeletePasswordListener#0;class#ContentFrameListener#0" />
-                <element signature="class#EditPasswordListener#0;class#ContentFrameListener#0" />
                 <element signature="class#LockPasswords#0;class#ContentFrameListener#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/frames/components/PasswordPanel.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/frames/components/PasswordGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
+            <state relative-caret-position="751">
+              <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#97#98#0" expanded="true" />
+                <element signature="e#116#117#0" expanded="true" />
+                <element signature="e#2744#2745#0" expanded="true" />
+                <element signature="e#2779#2780#0" expanded="true" />
+                <element signature="e#2786#2787#0" expanded="true" />
+                <element signature="e#2823#2824#0" expanded="true" />
+                <element signature="e#2873#2874#0" expanded="true" />
+                <element signature="e#2916#2917#0" expanded="true" />
+                <element signature="e#2934#2935#0" expanded="true" />
+                <element signature="e#2977#2978#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/listener/PasswordGeneratorListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="114" selection-start-line="12" selection-start-column="114" selection-end-line="12" selection-end-column="114" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -197,22 +207,24 @@
         <option value="$PROJECT_DIR$/src/main/java/frames/LoginFrame.java" />
         <option value="$PROJECT_DIR$/src/main/java/util/IconHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/models/CategorieOption.java" />
-        <option value="$PROJECT_DIR$/src/main/java/models/Categorie.java" />
         <option value="$PROJECT_DIR$/src/main/java/frames/CategorieTree.java" />
         <option value="$PROJECT_DIR$/src/main/java/frames/components/CategorieTree.java" />
         <option value="$PROJECT_DIR$/src/main/java/util/TableModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/frames/components/PasswordPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/listener/CategorieTreeListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/listener/ContentFrameListener.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/log.txt" />
         <option value="$PROJECT_DIR$/src/main/resources/logging.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/frames/MainFrame.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frames/ContentFrame.java" />
         <option value="$PROJECT_DIR$/src/main/java/util/LoggerUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/listener/MainFrameListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/App.java" />
         <option value="$PROJECT_DIR$/src/main/java/frames/components/CategoriePanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/models/Categorie.java" />
+        <option value="$PROJECT_DIR$/src/main/java/listener/ContentFrameListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frames/MainFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/listener/MainFrameListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frames/ContentFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/listener/PasswordGeneratorListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frames/components/PasswordGenerator.java" />
       </list>
     </option>
   </component>
@@ -240,6 +252,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -280,13 +293,37 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="frames" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="keymanager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Key_Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="listener" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="keymanager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Key_Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="keymanager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Key_Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -351,18 +388,19 @@
       <workItem from="1565247146406" duration="10408000" />
       <workItem from="1565326885496" duration="10813000" />
       <workItem from="1565342809983" duration="3506000" />
-      <workItem from="1565584892424" duration="62900000" />
+      <workItem from="1565584892424" duration="64739000" />
+      <workItem from="1566974080678" duration="9394000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="243938000" />
+    <option name="totallyTimeSpent" value="255171000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1440" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49945593" visible="true" weight="0.15607625" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49945593" visible="true" weight="0.15726767" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -398,16 +436,6 @@
     <option name="version" value="1" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/frames/ContentFrame.java</url>
-          <line>64</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="ContentFrame.categoriePanel" language="JAVA" />
@@ -536,27 +564,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/EditIcon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/models/Categorie.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="31" column="5" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="31" selection-end-column="5" />
-          <folding>
-            <element signature="e#323#324#0" expanded="true" />
-            <element signature="e#350#351#0" expanded="true" />
-            <element signature="e#467#468#0" expanded="true" />
-            <element signature="e#499#500#0" expanded="true" />
-            <element signature="e#558#559#0" expanded="true" />
-            <element signature="e#600#601#0" expanded="true" />
-            <element signature="e#655#656#0" expanded="true" />
-            <element signature="e#687#688#0" expanded="true" />
-            <element signature="e#743#744#0" expanded="true" />
-            <element signature="e#782#783#0" expanded="true" />
-            <element signature="e#845#846#0" expanded="true" />
-            <element signature="e#868#869#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/models/CategorieOption.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -567,13 +574,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/util/TableModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/util/TableModel.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/listener/CategorieTreeListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
@@ -618,39 +619,11 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/UnlockIcon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/UnlockIcon.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/LockIcon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/LockIcon1.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frames/components/PasswordPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/listener/ContentFrameListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="165" column="64" selection-start-line="165" selection-start-column="64" selection-end-line="165" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#EditCategorieTableListener#0;class#ContentFrameListener#0" />
-            <element signature="class#SaveCategorieTableListener#0;class#ContentFrameListener#0" />
-            <element signature="class#DeletePasswordListener#0;class#ContentFrameListener#0" />
-            <element signature="class#EditPasswordListener#0;class#ContentFrameListener#0" />
-            <element signature="class#LockPasswords#0;class#ContentFrameListener#0" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -662,27 +635,42 @@
     <entry file="file://$PROJECT_DIR$/log.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/logging.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/logging.properties" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="71" selection-start-line="4" selection-start-column="71" selection-end-line="4" selection-end-column="71" />
+        <state relative-caret-position="135">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frames/ContentFrame.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/models/Categorie.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+        <state relative-caret-position="225">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="e#323#324#0" expanded="true" />
+            <element signature="e#350#351#0" expanded="true" />
+            <element signature="e#467#468#0" expanded="true" />
+            <element signature="e#499#500#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#600#601#0" expanded="true" />
+            <element signature="e#655#656#0" expanded="true" />
+            <element signature="e#687#688#0" expanded="true" />
+            <element signature="e#743#744#0" expanded="true" />
+            <element signature="e#782#783#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frames/LoginFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="50" column="55" selection-start-line="50" selection-start-column="55" selection-end-line="50" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10079#10112#1" />
-            <element signature="e#1581#1582#0" expanded="true" />
-            <element signature="e#10159#10197#1" />
-            <element signature="e#1751#1752#0" expanded="true" />
-            <element signature="e#10243#10280#1" />
-            <element signature="e#1841#1842#0" expanded="true" />
-            <element signature="e#10400#10430#1" />
-            <element signature="e#1914#1915#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -697,10 +685,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/App.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/listener/ContentFrameListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        <state relative-caret-position="255">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#EditCategorieTableListener#0;class#ContentFrameListener#0" />
+            <element signature="class#DeletePasswordListener#0;class#ContentFrameListener#0" />
+            <element signature="class#LockPasswords#0;class#ContentFrameListener#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frames/components/CategoriePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2760">
+          <caret line="186" column="36" selection-start-line="186" selection-start-column="36" selection-end-line="186" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getCategorieTableContent#0;class#CategoriePanel#0" />
+            <element signature="e#11259#11260#0" expanded="true" />
+            <element signature="e#11300#11301#0" expanded="true" />
+            <element signature="e#11339#11340#0" expanded="true" />
+            <element signature="e#11371#11372#0" expanded="true" />
+            <element signature="e#11411#11412#0" expanded="true" />
+            <element signature="e#11447#11448#0" expanded="true" />
+            <element signature="e#11506#11507#0" expanded="true" />
+            <element signature="e#11556#11557#0" expanded="true" />
+            <element signature="e#11612#11613#0" expanded="true" />
+            <element signature="e#11660#11661#0" expanded="true" />
+            <element signature="class#EditCategorieTableRenderer#0;class#CategoriePanel#0" />
+            <element signature="class#SaveCategorieTableRenderer#0;class#CategoriePanel#0" />
+            <element signature="class#CategorieTableEditor#0;class#CategoriePanel#0" />
+            <element signature="class#DebugThread#0;class#CategoriePanel#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frames/components/PasswordPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -709,22 +735,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frames/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1410">
-          <caret line="94" column="58" selection-start-line="94" selection-start-column="58" selection-end-line="94" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#383#384#0" expanded="true" />
-            <element signature="e#411#412#0" expanded="true" />
-            <element signature="e#3979#3980#0" expanded="true" />
-            <element signature="e#4014#4015#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frames/LoginFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="636">
-          <caret line="50" column="55" selection-start-line="50" selection-start-column="55" selection-end-line="50" selection-end-column="55" />
+        <state relative-caret-position="711">
+          <caret line="78" column="101" selection-start-line="78" selection-start-column="101" selection-end-line="78" selection-end-column="101" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -733,36 +745,69 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/listener/MainFrameListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="156" selection-start-line="156" selection-end-line="156" />
+        <state relative-caret-position="816">
+          <caret line="496" column="91" selection-start-line="496" selection-start-column="91" selection-end-line="496" selection-end-column="91" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#newCatListener#0;class#MainFrameListener#0" />
             <element signature="class#createCatButtonListener#0;class#newCatListener#0;class#MainFrameListener#0" />
+            <element signature="class#delCatListener#0;class#MainFrameListener#0" />
             <element signature="class#newPasListener#0;class#MainFrameListener#0" />
             <element signature="method#actionPerformed#0;class#newPasListener#0;class#MainFrameListener#0" />
             <element signature="method#isPossible#0;class#newPasListener#0;class#MainFrameListener#0" />
+            <element signature="class#changeMainPassListener#0;class#MainFrameListener#0" />
             <element signature="class#exitListener#0;class#MainFrameListener#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frames/components/CategoriePanel.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/frames/ContentFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="193" column="22" lean-forward="true" selection-start-line="193" selection-start-column="22" selection-end-line="193" selection-end-column="22" />
+        <state relative-caret-position="891">
+          <caret line="85" column="60" selection-start-line="85" selection-start-column="60" selection-end-line="85" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getCategorieTableContent#0;class#CategoriePanel#0" />
-            <element signature="e#11185#11186#0" expanded="true" />
-            <element signature="e#11256#11257#0" expanded="true" />
-            <element signature="e#11332#11333#0" expanded="true" />
-            <element signature="e#11441#11442#0" expanded="true" />
-            <element signature="e#11545#11546#0" expanded="true" />
-            <element signature="class#TableModel#0;class#CategoriePanel#0" />
-            <element signature="class#EditCategorieTableRenderer#0;class#CategoriePanel#0" />
-            <element signature="class#SaveCategorieTableRenderer#0;class#CategoriePanel#0" />
-            <element signature="class#CategorieTableEditor#0;class#CategoriePanel#0" />
+            <element signature="method#updateCategoriePanel#0;class#ContentFrame#0" />
+            <element signature="method#updatePasswordPanel#0;class#ContentFrame#0" />
+            <element signature="e#1549#1550#0" expanded="true" />
+            <element signature="e#1581#1582#0" expanded="true" />
+            <element signature="e#1714#1715#0" expanded="true" />
+            <element signature="e#1751#1752#0" expanded="true" />
+            <element signature="e#1805#1806#0" expanded="true" />
+            <element signature="e#1841#1842#0" expanded="true" />
+            <element signature="e#1885#1886#0" expanded="true" />
+            <element signature="e#1914#1915#0" expanded="true" />
+            <element signature="e#2381#2382#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/listener/PasswordGeneratorListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="114" selection-start-line="12" selection-start-column="114" selection-end-line="12" selection-end-column="114" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frames/components/PasswordGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="751">
+          <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#97#98#0" expanded="true" />
+            <element signature="e#116#117#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2779#2780#0" expanded="true" />
+            <element signature="e#2786#2787#0" expanded="true" />
+            <element signature="e#2823#2824#0" expanded="true" />
+            <element signature="e#2873#2874#0" expanded="true" />
+            <element signature="e#2916#2917#0" expanded="true" />
+            <element signature="e#2934#2935#0" expanded="true" />
+            <element signature="e#2977#2978#0" expanded="true" />
           </folding>
         </state>
       </provider>

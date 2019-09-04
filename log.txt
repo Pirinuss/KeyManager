@@ -1,8 +1,6 @@
-[2019-08-27 14:39:22] [INFO   ] Start logging 
-[2019-08-27 14:39:34] [INFO   ] Kategorie angelegt: Name: test, Bereich: --Ohne Bereich-- 
-[2019-08-27 14:39:51] [INFO   ] Neuer Passworteintrag für Kategorie test angelegt:   Titel: test,  Nutzername: test, Passwortlänge: 4, URL: test, Info: sdadkflsa l	dsalödfjalö		ksldfjasöldf
-	klfdsjalöfalfdj	
-
-			dsafafdsadf
-asdfasfd
-sdfsdf	sfa	 
+[2019-09-04 12:44:55] [INFO   ] Start logging 
+[2019-09-04 12:45:02] [INFO   ] Kategorie angelegt: Name: "test", Bereich: "--Ohne Bereich--" 
+[2019-09-04 12:45:46] [INFO   ] Neuer Passworteintrag für Kategorie "test" angelegt:   Titel: "test",  Nutzername: "test", Passwortlänge: 3, URL: "te", Info: "" erstellt 
+[2019-09-04 12:45:50] [WARNING] Funktion funktioniert noch nicht 
+[2019-09-04 12:45:56] [INFO   ] Kategorie "test" bearbeitet 
+[2019-09-04 12:45:58] [WARNING] Funktion funktioniert noch nicht 

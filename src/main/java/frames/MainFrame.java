@@ -76,6 +76,7 @@ public class MainFrame {
         //Erstelle viewMenu
         JMenu viewMenu = new JMenu("Einstellungen");
         JMenuItem configPasswordGenerator = new JMenuItem("Passwort Generator konfigurieren");
+        configPasswordGenerator.addActionListener(new MainFrameListener.passwordGeneratorListener());
         viewMenu.add(configPasswordGenerator);
 
         //Erstelle helpMenu

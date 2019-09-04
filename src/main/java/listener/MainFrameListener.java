@@ -3,6 +3,7 @@ package listener;
 import frames.components.CategorieTree;
 import frames.ContentFrame;
 import frames.MainFrame;
+import frames.components.PasswordGenerator;
 import models.Categorie;
 import models.CategorieOption;
 import models.PasswordEntity;
@@ -68,7 +69,7 @@ public class MainFrameListener {
                 catTree.addCategorie(categorie, categorie.getId());
                 JTree tree = catTree.getTree();
                 tree.expandPath(tree.getNextMatch(categorie.getName(),0, Position.Bias.Forward));
-                logger.info("Kategorie angelegt: Name: " + newCatName.getText() + ", Bereich: " + CategorieOption.toString(categorieOption));
+                logger.info("Kategorie angelegt: Name: \"" + newCatName.getText() + "\", Bereich: \"" + CategorieOption.toString(categorieOption) + "\"");
             }
         }
 
@@ -133,6 +134,7 @@ public class MainFrameListener {
                         ArrayList<String> existingCats = catTree.getCatNames();
                         for (String catName : existingCats) {
                             if (catName.equals(newCatName.getText())) {
+                                logger.warning("Fehler beim Erstellen einer Kategorie: Kategoriename \"" + newCatName.getText() + "\" ist bereits vergeben");
                                 validationLabel.setText("Eine Kategorie mit diesem Namen existiert bereits");
                                 validationLabel.setVisible(true);
                                 return;
@@ -156,6 +158,7 @@ public class MainFrameListener {
         public void actionPerformed(ActionEvent e) {
             Object[] possibilities = new Object[catTree.getCatNames().size()];
             if (possibilities.length == 0) {
+                logger.warning("Fehler beim Kategorie Löschen: Es wurde noch keine Kategorie angelegt");
                 JOptionPane.showMessageDialog(container, "Es wurde noch keine Kategorie angelegt", "Löschen nicht möglich", JOptionPane.WARNING_MESSAGE);
                 return;
             }
@@ -174,7 +177,7 @@ public class MainFrameListener {
             }
 
             MainFrame.getCatTree().removeCategorie(catName);
-            logger.info("Kategorie mit Namen " + catName +" gelöscht");
+            logger.info("Kategorie \"" + catName +"\" gelöscht");
 
             ContentFrame.getLayout().first(ContentFrame.getMainPanel());
 
@@ -352,8 +355,10 @@ public class MainFrameListener {
                     isValide = false;
                     validationLabel.setForeground(Color.RED);
                     if (sb.length() <= 10) {
+                        logger.warning("Fehler beim Erstellen eines Passwords: Folgendes Feld darf nicht leer sein: " + sb.toString());
                         validationLabel.setText("Folgendes Feld darf nicht leer sein: " + sb.toString());
                     } else {
+                        logger.warning("Fehler beim Erstellen eines Passwords: Folgende Felder dürfen nicht leer sein: " + sb.toString());
                         validationLabel.setText("Folgende Felder dürfen nicht leer sein: " + sb.toString());
                     }
                 }
@@ -400,12 +405,14 @@ public class MainFrameListener {
                 MainFrame.getCatTree().getTree().updateUI();
 
                 ContentFrame.getCategoriePanel().setDebugInfo("Neuer Passworteintrag angelegt!", 7000, Color.GREEN.darker());
-                logger.info("Neuer Passworteintrag für Kategorie " + categorieName
-                        + " angelegt:   Titel: " + passwordEntity.getTitle()
-                        + ",  Nutzername: " + passwordEntity.getUserName()
-                        + ", Passwortlänge: " + passwordEntity.getPassword().length()
-                        + ", URL: " + passwordEntity.getUrl()
-                        + ", Info: " + passwordEntity.getInfo());
+                logger.info("Neuer Passworteintrag für Kategorie \"" + categorieName
+                        + "\" angelegt:   Titel: \"" + passwordEntity.getTitle()
+                        + "\",  Nutzername: \"" + passwordEntity.getUserName()
+                        + "\", Passwortlänge: " + passwordEntity.getPassword().length()
+                        + ", URL: \"" + passwordEntity.getUrl()
+                        + "\", Info: \"" + passwordEntity.getInfo()
+                        + "\" erstellt"
+                );
             }
         }
     }
@@ -413,6 +420,8 @@ public class MainFrameListener {
     public static class changeMainPassListener implements ActionListener {
 
         public void actionPerformed(ActionEvent arg0) {
+
+            logger.severe("Gefahr");
 
             JDialog newMainPas = new JDialog(frame, "Neues Masterpasswort");
             newMainPas.setVisible(true);
@@ -457,6 +466,13 @@ public class MainFrameListener {
 
                 while ((currentLine = br.readLine()) != null) {
                     JLabel contentLabel = new JLabel(currentLine);
+                    if (currentLine.contains("[WARNING")) {
+                        contentLabel.setForeground(Color.YELLOW.darker());
+                    } else if (currentLine.contains("[SEVERE")){
+                        contentLabel.setForeground(Color.RED);
+                    } else {
+                        contentLabel.setForeground(Color.GREEN.darker());
+                    }
                     logPanel.add(contentLabel);
                 }
 
@@ -469,6 +485,16 @@ public class MainFrameListener {
 
             MainFrame.getContentPanel().showLogPanel(new JScrollPane(logPanel));
 
+        }
+    }
+
+    public static class passwordGeneratorListener implements  ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+
+            PasswordGenerator passwordGeneratorPanel = new PasswordGenerator();
+
+            MainFrame.getContentPanel().showPasswordGeneratorPanel(passwordGeneratorPanel);
         }
     }
 

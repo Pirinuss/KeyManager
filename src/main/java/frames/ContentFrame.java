@@ -1,6 +1,7 @@
 package frames;
 
 import frames.components.CategoriePanel;
+import frames.components.PasswordGenerator;
 import frames.components.PasswordPanel;
 import models.Categorie;
 import models.PasswordEntity;
@@ -16,6 +17,7 @@ public class ContentFrame {
     private static CategoriePanel categoriePanel = new CategoriePanel(null);
     private static PasswordPanel passwordPanel = new PasswordPanel(null);
     private static JScrollPane logPanel;
+    private static PasswordGenerator passwordGenerator;
 
     public ContentFrame() {
 
@@ -53,6 +55,14 @@ public class ContentFrame {
         logPanel.updateUI();
     }
 
+    public void showPasswordGeneratorPanel(PasswordGenerator panel) {
+        passwordGenerator = panel;
+        mainPanel.add(panel, "passwordGeneratorPanel");
+
+        layout.show(mainPanel, "passwordGeneratorPanel");
+        passwordGenerator.updateUI();
+    }
+
     public static JPanel getMainPanel() {
         return mainPanel;
     }
@@ -71,5 +81,9 @@ public class ContentFrame {
 
     public static CardLayout getLayout() {
         return layout;
+    }
+
+    public static PasswordGenerator getPasswordGenerator() {
+        return passwordGenerator;
     }
 }

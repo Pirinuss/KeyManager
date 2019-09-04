@@ -7,6 +7,7 @@ import models.Categorie;
 import models.CategorieOption;
 import models.PasswordEntity;
 import util.IconHandler;
+import util.LoggerUtil;
 
 import javax.swing.*;
 import javax.swing.text.Position;
@@ -14,8 +15,11 @@ import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 public class ContentFrameListener {
+
+    private static Logger logger = LoggerUtil.getLogger();
 
     public static class EditCategorieTableListener implements ActionListener {
 
@@ -101,6 +105,7 @@ public class ContentFrameListener {
                 }
             }
 
+            logger.info("Kategorie \"" + categorie.getName() + "\" bearbeitet");
             ContentFrame.getCategoriePanel().setDebugInfo("Kategorie erfolgreich editiert!", 5000, Color.GREEN.darker());
         }
     }
@@ -152,6 +157,7 @@ public class ContentFrameListener {
             tree.expandPath(tree.getNextMatch(currentCategorie.getName(),0, Position.Bias.Forward));
             tree.updateUI();
 
+            logger.info("Passworteintrag \"" + selectedPassword.getTitle() + "\" in Kategorie \"" + currentCategorie.getName() + "\" gelöscht");
             ContentFrame.getCategoriePanel().setDebugInfo("Passworteintrag erfolgreich gelöscht!", 5000, Color.GREEN.darker());
         }
     }
@@ -159,6 +165,7 @@ public class ContentFrameListener {
     public static class EditPasswordListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
+            logger.warning("Funktion funktioniert noch nicht");
             ContentFrame.getCategoriePanel().setDebugInfo("Funktion noch nicht implementiert!", 3000, Color.RED);
         }
     }
