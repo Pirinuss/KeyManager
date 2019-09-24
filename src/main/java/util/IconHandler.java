@@ -1,5 +1,7 @@
 package util;
 
+import models.CategorieOption;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +37,17 @@ public class IconHandler {
         JLabel picLabel = new JLabel(new ImageIcon(myPicture));
         iconPanel.add(picLabel, BorderLayout.CENTER);
         return iconPanel;
+    }
+
+    public static ImageIcon getIconForCategorieOption(CategorieOption categorieOption) {
+        switch (categorieOption) {
+            case FINANCE:
+                return (ImageIcon) getIcon("FinanceIcon2.png", 18,18);
+            case TRAVEL:
+                return (ImageIcon) getIcon("PlaneIcon.png", 18,18);
+        }
+
+        return null;
     }
 
 }

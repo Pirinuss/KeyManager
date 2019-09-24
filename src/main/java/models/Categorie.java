@@ -9,7 +9,7 @@ public class Categorie {
     private CategorieOption catOption;
     private ArrayList<PasswordEntity> passwords = new ArrayList<PasswordEntity>();
 
-    private static final int MAXPASSWORDSAMOUNT = 20;
+    private static final int MAXPASSWORDSAMOUNT = 10;
 
     public String getName() {
         return name;

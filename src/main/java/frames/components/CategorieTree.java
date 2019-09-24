@@ -2,11 +2,11 @@ package frames.components;
 
 import listener.CategorieTreeListener;
 import models.Categorie;
+import util.FileUtil;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.FileNotFoundException;
+import java.util.*;
 import javax.swing.JTree;
 import javax.swing.tree.*;
 
@@ -14,18 +14,40 @@ public class CategorieTree {
 
     private JTree tree;
     private DefaultMutableTreeNode root;
-    private HashMap<Integer, Categorie> categories = new HashMap<Integer, Categorie>();
+    private HashMap<Integer, Categorie> categories;
 
     public CategorieTree() {
+
         root = new DefaultMutableTreeNode("Kategorien");
         tree = new JTree(root);
         tree.addTreeSelectionListener(new CategorieTreeListener());
         tree.setPreferredSize(new Dimension(150,1000));
 
-        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
-        renderer.setTextSelectionColor(Color.BLACK);
-        renderer.setBackgroundSelectionColor(Color.LIGHT_GRAY);
-        renderer.setBorderSelectionColor(Color.LIGHT_GRAY);
+        CategorieTreeCellRenderer renderer = new CategorieTreeCellRenderer();
+        //renderer.setBackgroundSelectionColor(Color.BLUE);
+        //renderer.setBorderSelectionColor(Color.BLUE.darker());
+        //renderer.setBackground(new Color(0xe6e6e6));
+        //renderer.setBackgroundNonSelectionColor(new Color(0xe6e6e6));
+        tree.setCellRenderer(renderer);
+
+        loadData();
+    }
+
+    private void loadData() {
+
+        categories = new HashMap<Integer, Categorie>();
+
+        try {
+            Categorie[] categorieCollection = FileUtil.readFromFile();
+
+            for (int i = 0; i<categorieCollection.length; i++) {
+                Categorie categorie = (Categorie) categorieCollection[i];
+                addCategorie(categorie, categorie.getId());
+            }
+
+        } catch (FileNotFoundException e) {
+            // TODO
+        }
     }
 
     public JTree getTree() {
@@ -40,6 +62,7 @@ public class CategorieTree {
         model.insertNodeInto(newCat, root, root.getChildCount());
         tree.scrollPathToVisible(new TreePath(newCat.getPath()));
         categories.put((int) id, categorie);
+
         model.reload();
     }
 

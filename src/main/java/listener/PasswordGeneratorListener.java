@@ -11,10 +11,22 @@ public class PasswordGeneratorListener {
     public static class GeneratePasswordListener implements ActionListener {
 
         private String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!§$%&?ßÄÖÜäöü@€";
+        private boolean supersave;
+
+        public GeneratePasswordListener(boolean supersave) {
+            this.supersave = supersave;
+        }
 
         public void actionPerformed(ActionEvent e) {
 
-            int passwordLength = MainFrame.getContentPanel().getPasswordGenerator().getPasswordLengthSlider().getValue();
+            int passwordLength;
+
+            if (supersave) {
+                passwordLength = 32;
+            } else {
+                passwordLength = MainFrame.getContentPanel().getPasswordGenerator().getPasswordLengthSlider().getValue();
+            }
+
             boolean withSpecialChars = MainFrame.getContentPanel().getPasswordGenerator().getSpecialCharsCheckBox().isSelected();
             boolean withNumbers = MainFrame.getContentPanel().getPasswordGenerator().getNumberCheckBox().isSelected();
 

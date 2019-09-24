@@ -16,6 +16,7 @@ public class PasswordGenerator extends JPanel {
     private JCheckBox specialCharsCheckBox;
 
     public PasswordGenerator() {
+        this.setBackground(new Color(0xe6e6e6));
         initPasswordGeneratorPanel();
     }
 
@@ -23,6 +24,7 @@ public class PasswordGenerator extends JPanel {
 
         JPanel configPanel = new JPanel();
         configPanel.setLayout(new BoxLayout(configPanel, BoxLayout.Y_AXIS));
+        configPanel.setBackground(new Color(0xe6e6e6));
 
         // Schieberegler
         passwordLengthSlider = new JSlider(4,20,8);
@@ -37,6 +39,7 @@ public class PasswordGenerator extends JPanel {
         JLabel textLabel = new JLabel("Ausgewählte Länge:");
         displayLengthLabel = new JLabel(String.valueOf(passwordLengthSlider.getValue()));
         displayPasswordLengthPanel.add(textLabel);
+        displayPasswordLengthPanel.setBackground(new Color(0xe6e6e6));
         displayPasswordLengthPanel.add(displayLengthLabel);
 
         // Checkboxes
@@ -46,9 +49,11 @@ public class PasswordGenerator extends JPanel {
         // Button
         JPanel buttonGroup = new JPanel();
         JButton generateButton = new JButton("Passwort generieren");
-        generateButton.addActionListener(new PasswordGeneratorListener.GeneratePasswordListener());
+        generateButton.addActionListener(new PasswordGeneratorListener.GeneratePasswordListener(false));
         JButton generateStrongButton = new JButton("Super sicheres Passwort generieren");
+        generateStrongButton.addActionListener(new PasswordGeneratorListener.GeneratePasswordListener(true));
         buttonGroup.add(generateButton);
+        buttonGroup.setBackground(new Color(0xe6e6e6));
         buttonGroup.add(generateStrongButton);
 
         // Textfeld

@@ -7,23 +7,29 @@ import frames.components.PasswordGenerator;
 import models.Categorie;
 import models.CategorieOption;
 import models.PasswordEntity;
+import util.FileUtil;
 import util.IconHandler;
 import util.LoggerUtil;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.swing.*;
 import javax.swing.text.Position;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeCellRenderer;
+
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
 public class MainFrameListener {
 
@@ -31,7 +37,7 @@ public class MainFrameListener {
 
     private static Frame frame = MainFrame.getFrame();
     private static Container container = MainFrame.getContainer();
-    private static CategorieTree catTree;
+    private static CategorieTree catTree = MainFrame.getCatTree();
 
     private static ImageIcon trashCanIcon = new ImageIcon("src/main/resources/TrashCanIcon.png");
 
@@ -48,8 +54,6 @@ public class MainFrameListener {
         private boolean create = false;
 
         public void actionPerformed(ActionEvent arg0) {
-
-            catTree = MainFrame.getCatTree();
 
             dialog = new JDialog();
             dialog.setTitle("Kategorie erstellen");
@@ -498,4 +502,15 @@ public class MainFrameListener {
         }
     }
 
+    public static class safeListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+
+            Gson gson = new Gson();
+            HashMap<Integer, Categorie> entries = MainFrame.getCatTree().getCategories();
+            Collection<Categorie> categories = entries.values();
+            FileUtil.writeToFile(gson.toJson(categories));
+
+        }
+    }
 }

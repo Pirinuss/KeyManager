@@ -40,9 +40,8 @@ public class MainFrame {
     }
 
     private void createMenuBar() {
-        UIManager.put("MenuBar.background", Color.ORANGE);
         JMenuBar menuBar = new JMenuBar();
-
+        menuBar.setBackground(new Color(0xB8C6BF));
 
         //Erstelle newMenu
         JMenu newMenu = new JMenu("Bearbeiten");
@@ -64,7 +63,8 @@ public class MainFrame {
         JMenuItem deletePassword = new JMenuItem("Passworteintrag löschen (TODO)");
         newMenu.add(deletePassword);
         newMenu.addSeparator();
-        JMenuItem safe = new JMenuItem("Speichern (TODO)");
+        JMenuItem safe = new JMenuItem("Speichern");
+        safe.addActionListener(new MainFrameListener.safeListener());
         newMenu.add(safe);
         JMenuItem safeAs = new JMenuItem("Speichern als (TODO)");
         newMenu.add(safeAs);
@@ -93,6 +93,7 @@ public class MainFrame {
 
     private void createCategorieTree() {
         catTree.getTree().setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        catTree.getTree().setBackground(new Color(0xe6e6e6));
         container.add(catTree.getTree(), BorderLayout.WEST);
     }
 

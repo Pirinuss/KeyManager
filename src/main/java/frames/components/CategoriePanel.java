@@ -1,11 +1,12 @@
 package frames.components;
 
+import frames.components.PasswordTable.PasswordTable;
+import frames.components.PasswordTable.PasswordTable1;
+import frames.components.PasswordTable.PasswordTable2;
 import listener.ContentFrameListener;
 import listener.MainFrameListener;
 import models.Categorie;
 import models.CategorieOption;
-import models.PasswordEntity;
-import util.IconHandler;
 import util.LoggerUtil;
 
 import javax.swing.*;
@@ -13,9 +14,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.logging.*;
 
@@ -27,54 +25,35 @@ public class CategoriePanel extends JPanel {
     private Categorie categorie;
 
     private static JTable categorieInfoTable;
-    private static JPanel debugPanel;
-    private static JPanel passwordTablePanel;
-    private static JPanel categoriePasswordPanel;
+    private static PasswordTable passwordTable;
 
-    private boolean showPasswords;
-    private String lockIconName;
+    private boolean switchLayoutFlag;
 
     public CategoriePanel(Categorie categorie) {
 
+        switchLayoutFlag = false;
         this.categorie = categorie;
-        showPasswords = false;
-        lockIconName = "LockIcon1.png";
         createCategoriePanel();
     }
 
     private void createCategoriePanel() {
         this.setLayout(new BorderLayout());
 
-        // Debug Panel
-        debugPanel = new JPanel(new GridBagLayout());
-        debugPanel.setBackground(Color.LIGHT_GRAY);
-        debugPanel.setPreferredSize(new Dimension(40,50));
-        JLabel debugInfo = new JLabel(" ");
-        debugInfo.setName("debugInfo");
-        debugInfo.setForeground(Color.RED);
-        debugPanel.add(debugInfo);
-
         // Password Table
-        passwordTablePanel = new JPanel(new BorderLayout());
-        passwordTablePanel.setBackground(Color.LIGHT_GRAY);
-        JLabel emptyLabel1 = new JLabel("          ");
-        JLabel emptyLabel2 = new JLabel("          ");
-        passwordTablePanel.add(emptyLabel1, BorderLayout.WEST);
-        passwordTablePanel.add(emptyLabel2, BorderLayout.EAST);
-        passwordTablePanel.add(createPasswordTable(), BorderLayout.CENTER);
-        passwordTablePanel.add(debugPanel, BorderLayout.NORTH);
-
-        // Password Table Versuch 2
-        passwordTablePanel = new
+        passwordTable = new PasswordTable2();
+        passwordTable.setBackground(new Color(0x2F394D));
 
         // Button Panel
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(Color.LIGHT_GRAY);
+        buttonPanel.setBackground(new Color(0x2F394D));
         JButton newPasswordButton = new JButton("Password hinzufügen");
+        newPasswordButton.setBackground(new Color(0xB0C1C4));
         newPasswordButton.setName("newPasswordButton");
         JButton editButton = new JButton("Bearbeiten");
+        editButton.setBackground(new Color(0xB0C1C4));
         editButton.setName("editButton");
         JButton deleteButton = new JButton("Löschen");
+        deleteButton.setBackground(new Color(0xB0C1C4));
         deleteButton.setName("deleteButton");
         deleteButton.addActionListener(new MainFrameListener.delCatListener());
         editButton.addActionListener(new ContentFrameListener.EditCategorieTableListener(editButton));
@@ -84,14 +63,31 @@ public class CategoriePanel extends JPanel {
         buttonPanel.add(deleteButton);
 
         this.add(createCategorieTable(), BorderLayout.NORTH);
-        this.add(passwordTablePanel, BorderLayout.CENTER);
+        this.add(passwordTable, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.SOUTH);
 
     }
 
     public void setDebugInfo(String message, int displayDuration, Color color) {
-        Thread displayDebugThread = new Thread(new DebugThread(message, displayDuration, color));
-        displayDebugThread.start();
+        passwordTable.setDebugInfo(message, displayDuration, color);
+    }
+
+    public void switchPasswordTableLayout() {
+
+        this.remove(passwordTable);
+
+        if (!switchLayoutFlag) {
+            passwordTable = new PasswordTable1();
+        } else {
+            passwordTable = new PasswordTable2();
+        }
+
+        this.add(passwordTable);
+        updateCategoriePanel(this.categorie);
+
+        switchLayoutFlag = !switchLayoutFlag;
+
+        this.updateUI();
     }
 
     private JTable createCategorieTable() {
@@ -100,8 +96,9 @@ public class CategoriePanel extends JPanel {
         TableModel model = new TableModel(5,2);
         categorieInfoTable.setModel(model);
         categorieInfoTable.setFont(new Font("Times", Font.BOLD, 20));
+        categorieInfoTable.setForeground(new Color(0xFBACBE));
 
-        categorieInfoTable.setBackground(Color.LIGHT_GRAY);
+        categorieInfoTable.setBackground(new Color(0x2F394D));
         categorieInfoTable.setCellSelectionEnabled(false);
         categorieInfoTable.setShowGrid(false);
         categorieInfoTable.setRowHeight(30);
@@ -115,156 +112,6 @@ public class CategoriePanel extends JPanel {
         return categorieInfoTable;
     }
 
-    private JPanel createPasswordTable() {
-
-        categoriePasswordPanel = new JPanel(new GridLayout(Categorie.getMaxpasswordsAmount(),6));
-        categoriePasswordPanel.setBackground(Color.LIGHT_GRAY);
-        setCategoriePasswordPanelHeader();
-        for (int i=0; i<(Categorie.getMaxpasswordsAmount()-1)*6; i++) {
-            JLabel emptyLabel = new JLabel("   ");
-            categoriePasswordPanel.add(emptyLabel);
-        }
-
-        return categoriePasswordPanel;
-    }
-
-    private void updatePasswordTable() {
-
-        passwordTablePanel.remove(categoriePasswordPanel);
-
-        ArrayList<PasswordEntity> passwords = categorie.getPasswords();
-
-        GridLayout layout = new GridLayout(Categorie.getMaxpasswordsAmount(), 6);
-
-        categoriePasswordPanel = new JPanel(layout);
-        categoriePasswordPanel.setBackground(Color.LIGHT_GRAY);
-        setCategoriePasswordPanelHeader();
-
-        for (int i=0; i<passwords.size(); i++) {
-            // Titel
-            JTextField title = new JTextField(passwords.get(i).getTitle());
-            title.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-            title.setSelectionColor(Color.LIGHT_GRAY);
-            title.setEditable(false);
-            title.setBackground(Color.LIGHT_GRAY);
-
-            // Username
-            JTextField username = new JTextField(passwords.get(i).getUserName());
-            username.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-            username.setSelectionColor(Color.LIGHT_GRAY);
-            username.setEditable(false);
-            username.setBackground(Color.LIGHT_GRAY);
-
-            // Passwort
-            final JPasswordField password = new JPasswordField(passwords.get(i).getPassword());
-            password.setBackground(Color.LIGHT_GRAY);
-            password.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-            password.setEditable(false);
-            if (showPasswords) {
-                password.putClientProperty("JPasswordField.cutCopyAllowed", true);
-                password.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                        password.setEchoChar((char)0);
-                    }
-
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                        int dotUnicode = 9679;
-                        password.setEchoChar((char) dotUnicode);
-                    }
-                });
-            }
-
-            // URL
-            JTextField url = new JTextField(passwords.get(i).getUrl());
-            url.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-            url.setSelectionColor(Color.LIGHT_GRAY);
-            url.setEditable(false);
-            url.setBackground(Color.LIGHT_GRAY);
-
-            // Info
-            JTextField info = new JTextField(passwords.get(i).getInfo());
-            info.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-            info.setSelectionColor(Color.LIGHT_GRAY);
-            info.setEditable(false);
-            info.setBackground(Color.LIGHT_GRAY);
-            JPanel storagePanel = new JPanel();
-            storagePanel.add(info);
-            storagePanel.setBackground(Color.LIGHT_GRAY);
-            JScrollPane scrollPane = new JScrollPane(storagePanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            scrollPane.setBackground(Color.LIGHT_GRAY);
-
-            // Buttons
-            JPanel buttonPanel = new JPanel();
-            buttonPanel.setName("buttonPanel");
-            buttonPanel.setBackground(Color.LIGHT_GRAY);
-            JButton editButton = new JButton(IconHandler.getIcon("EditIcon.png", 15, 12));
-            editButton.addActionListener(new ContentFrameListener.EditPasswordListener());
-            JButton deleteButton = new JButton(IconHandler.getIcon("TrashCanIcon.png", 15,12));
-            deleteButton.setName(String.valueOf(i));
-            deleteButton.addActionListener(new ContentFrameListener.DeletePasswordListener());
-            buttonPanel.add(editButton);
-            buttonPanel.add(deleteButton);
-
-            categoriePasswordPanel.add(title);
-            categoriePasswordPanel.add(username);
-            categoriePasswordPanel.add(password);
-            categoriePasswordPanel.add(url);
-            categoriePasswordPanel.add(scrollPane);
-            categoriePasswordPanel.add(buttonPanel);
-
-            categoriePasswordPanel.validate();
-        }
-
-        for (int i=0; i<(Categorie.getMaxpasswordsAmount()-passwords.size()-1)*6; i++) {
-            JLabel emptyLabel = new JLabel("   ");
-            categoriePasswordPanel.add(emptyLabel);
-        }
-
-        passwordTablePanel.add(categoriePasswordPanel, BorderLayout.CENTER);
-        categoriePasswordPanel.validate();
-        categoriePasswordPanel.updateUI();
-    }
-
-    private void setCategoriePasswordPanelHeader() {
-        Font font = new Font("Times", Font.BOLD, 14);
-        JLabel titleLabel = new JLabel("Titel");
-        titleLabel.setFont(font);
-        titleLabel.setForeground(Color.MAGENTA);
-
-        JLabel usernameLabel = new JLabel("Nutzername");
-        usernameLabel.setFont(font);
-        usernameLabel.setForeground(Color.MAGENTA);
-
-        JPanel passwordPanel = new JPanel();
-        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
-        passwordPanel.setPreferredSize(new Dimension(70,23));
-        passwordPanel.setBackground(Color.LIGHT_GRAY);
-        JButton lockButton = new JButton(IconHandler.getIcon(lockIconName, 15,15));
-        lockButton.addActionListener(new ContentFrameListener.LockPasswords());
-        JLabel passwordLabel = new JLabel("Passwort");
-        passwordLabel.setFont(font);
-        passwordLabel.setForeground(Color.MAGENTA);
-        passwordPanel.add(passwordLabel);
-        passwordPanel.add(lockButton);
-
-        JLabel urlLabel = new JLabel("URL");
-        urlLabel.setFont(font);
-        urlLabel.setForeground(Color.MAGENTA);
-
-        JLabel infoLabel = new JLabel("Info");
-        infoLabel.setFont(font);
-        infoLabel.setForeground(Color.MAGENTA);
-
-        categoriePasswordPanel.add(titleLabel);
-        categoriePasswordPanel.add(usernameLabel);
-        categoriePasswordPanel.add(passwordPanel);
-        categoriePasswordPanel.add(urlLabel);
-        categoriePasswordPanel.add(infoLabel);
-        categoriePasswordPanel.add(new JLabel(" "));
-    }
-
     public void updateCategoriePanel(Categorie categorie) {
 
         this.categorie = categorie;
@@ -273,7 +120,7 @@ public class CategoriePanel extends JPanel {
         categorieInfoTable.setValueAt(CategorieOption.toString(categorie.getCatOption()), 1,1);
         categorieInfoTable.setValueAt(String.valueOf(categorie.getPasswords().size()),2,1);
 
-        updatePasswordTable();
+        passwordTable.initPasswordTableUpdate(categorie);
 
         this.updateUI();
     }
@@ -290,16 +137,8 @@ public class CategoriePanel extends JPanel {
         return categorie;
     }
 
-    public boolean isShowPasswords() {
-        return showPasswords;
-    }
-
-    public void setShowPasswords(boolean showPasswords) {
-        this.showPasswords = showPasswords;
-    }
-
-    public void setLockIconName(String lockIconName) {
-        this.lockIconName = lockIconName;
+    public static PasswordTable getPasswordTable() {
+        return passwordTable;
     }
 
     public static class TableModel extends DefaultTableModel {
@@ -339,6 +178,7 @@ public class CategoriePanel extends JPanel {
 
             JLabel label = new JLabel((String) value);
             label.setFont(new Font("Times", Font.BOLD, 20));
+            label.setForeground(new Color(0xFBACBE));
             return label;
         }
     }
@@ -349,6 +189,7 @@ public class CategoriePanel extends JPanel {
 
             JLabel label = new JLabel((String) value);
             label.setFont(new Font("Times", Font.BOLD, 20));
+            label.setForeground(new Color(0xFBACBE));
             return label;
         }
     }
@@ -409,40 +250,6 @@ public class CategoriePanel extends JPanel {
             stopCellEditing();
         }
 
-    }
-
-    private static class DebugThread implements Runnable {
-
-        private String message;
-        private int displayDuration;
-        private Color color;
-
-        public DebugThread(String message, int displayDuration, Color color) {
-            this.message = message;
-            this.displayDuration = displayDuration;
-            this.color = color;
-        }
-
-        public void run() {
-
-            JLabel debugInfo = (JLabel) debugPanel.getComponent(0);
-            if (!debugInfo.getText().equals(" ")) {
-                debugPanel.remove(debugInfo);
-                debugInfo = new JLabel(message);
-                debugPanel.add(debugInfo);
-                debugPanel.updateUI();
-            }
-
-            long time = System.currentTimeMillis();
-
-            debugInfo.setForeground(color);
-            while ((time+displayDuration) > System.currentTimeMillis()) {
-                debugInfo.setText(message);
-            }
-
-            debugInfo.setForeground(Color.BLACK);
-            debugInfo.setText(" ");
-        }
     }
 
 }

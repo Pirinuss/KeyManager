@@ -3,10 +3,10 @@ package listener;
 import frames.ContentFrame;
 import frames.MainFrame;
 import frames.components.CategoriePanel;
+import frames.components.PasswordTable.PasswordTable1;
 import models.Categorie;
 import models.CategorieOption;
 import models.PasswordEntity;
-import util.IconHandler;
 import util.LoggerUtil;
 
 import javax.swing.*;
@@ -174,18 +174,25 @@ public class ContentFrameListener {
 
         public void actionPerformed(ActionEvent e) {
 
-            CategoriePanel categoriePanel = MainFrame.getContentPanel().getCategoriePanel();
+            PasswordTable1 passwordTable = (PasswordTable1) MainFrame.getContentPanel().getCategoriePanel().getPasswordTable();
 
-            if (categoriePanel.isShowPasswords()) {
-                categoriePanel.setLockIconName("LockIcon1.png");
-                categoriePanel.setShowPasswords(false);
+            if (passwordTable.isShowPasswords()) {
+                passwordTable.setLockIconName("LockIcon1.png");
+                passwordTable.setShowPasswords(false);
             } else {
-                categoriePanel.setLockIconName("UnlockIcon1.png");
-                categoriePanel.setShowPasswords(true);
+                passwordTable.setLockIconName("UnlockIcon1.png");
+                passwordTable.setShowPasswords(true);
             }
 
             Categorie categorie = MainFrame.getContentPanel().getCategoriePanel().getCategorie();
             MainFrame.getContentPanel().updateCategoriePanel(categorie);
+        }
+    }
+
+    public static class SwitchLayoutListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            MainFrame.getContentPanel().getCategoriePanel().switchPasswordTableLayout();
         }
     }
 }
