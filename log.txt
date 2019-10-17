@@ -1,8 +1,1 @@
-[2019-09-24 12:50:23] [INFO   ] Start logging 
-[2019-09-24 12:51:25] [INFO   ] Neuer Passworteintrag für Kategorie "Haifisch" angelegt:   Titel: "ll",  Nutzername: "ll", Passwortlänge: 1, URL: "", Info: "" erstellt 
-[2019-09-24 12:53:01] [INFO   ] Neuer Passworteintrag für Kategorie "Haifisch" angelegt:   Titel: "ll",  Nutzername: "ll", Passwortlänge: 2, URL: "", Info: "" erstellt 
-[2019-09-24 12:53:13] [INFO   ] Passworteintrag "ll" in Kategorie "Haifisch" gelöscht 
-[2019-09-24 12:53:22] [INFO   ] Neuer Passworteintrag für Kategorie "Haifisch" angelegt:   Titel: "oo",  Nutzername: "o", Passwortlänge: 1, URL: "o", Info: "" erstellt 
-[2019-09-24 12:53:25] [INFO   ] Passworteintrag "oo" in Kategorie "Haifisch" gelöscht 
-[2019-09-24 12:53:27] [INFO   ] Passworteintrag "ll" in Kategorie "Haifisch" gelöscht 
-[2019-09-24 12:56:25] [WARNING] Funktion funktioniert noch nicht 
+[2019-10-12 16:56:34] [INFORMATION] Start logging 

@@ -16,18 +16,10 @@ public class PasswordTable1 extends PasswordTable {
     private Color tableColor = new Color(0x2F394D);
     private Color rowColor;
 
-    private static JPanel debugPanel;
     private static JPanel categoriePasswordPanel;
-
-    private String lockIconName;
-    private boolean showPasswords;
-
 
     public PasswordTable1() {
         super();
-
-        this.lockIconName = "LockIcon1.png";
-        showPasswords = false;
 
         this.setBackground(tableColor);
         this.add(createPasswordTable(), BorderLayout.CENTER);
@@ -199,18 +191,5 @@ public class PasswordTable1 extends PasswordTable {
 
 
     }
-
-    public void setLockIconName(String lockIconName) {
-        this.lockIconName = lockIconName;
-    }
-
-    public boolean isShowPasswords() {
-        return showPasswords;
-    }
-
-    public void setShowPasswords(boolean showPasswords) {
-        this.showPasswords = showPasswords;
-    }
-
 
 }

@@ -3,6 +3,7 @@ package listener;
 import frames.ContentFrame;
 import frames.MainFrame;
 import frames.components.CategoriePanel;
+import frames.components.PasswordTable.PasswordTable;
 import frames.components.PasswordTable.PasswordTable1;
 import models.Categorie;
 import models.CategorieOption;
@@ -174,7 +175,7 @@ public class ContentFrameListener {
 
         public void actionPerformed(ActionEvent e) {
 
-            PasswordTable1 passwordTable = (PasswordTable1) MainFrame.getContentPanel().getCategoriePanel().getPasswordTable();
+            PasswordTable passwordTable = (PasswordTable) MainFrame.getContentPanel().getCategoriePanel().getPasswordTable();
 
             if (passwordTable.isShowPasswords()) {
                 passwordTable.setLockIconName("LockIcon1.png");

@@ -1,7 +1,9 @@
 package frames.components;
 
+import frames.MainFrame;
 import listener.CategorieTreeListener;
 import models.Categorie;
+import models.PasswordEntity;
 import util.FileUtil;
 
 import java.awt.*;
@@ -12,7 +14,7 @@ import javax.swing.tree.*;
 
 public class CategorieTree {
 
-    private JTree tree;
+    private static JTree tree;
     private DefaultMutableTreeNode root;
     private HashMap<Integer, Categorie> categories;
 
@@ -21,14 +23,8 @@ public class CategorieTree {
         root = new DefaultMutableTreeNode("Kategorien");
         tree = new JTree(root);
         tree.addTreeSelectionListener(new CategorieTreeListener());
-        tree.setPreferredSize(new Dimension(150,1000));
-
-        CategorieTreeCellRenderer renderer = new CategorieTreeCellRenderer();
-        //renderer.setBackgroundSelectionColor(Color.BLUE);
-        //renderer.setBorderSelectionColor(Color.BLUE.darker());
-        //renderer.setBackground(new Color(0xe6e6e6));
-        //renderer.setBackgroundNonSelectionColor(new Color(0xe6e6e6));
-        tree.setCellRenderer(renderer);
+        tree.setPreferredSize(new Dimension(200,1000));
+        tree.setCellRenderer(new CategorieTreeCellRenderer());
 
         loadData();
     }
@@ -45,9 +41,34 @@ public class CategorieTree {
                 addCategorie(categorie, categorie.getId());
             }
 
+            Set<Map.Entry<Integer, Categorie>> categorieList = categories.entrySet();
+            for (Map.Entry entry : categorieList) {
+                Categorie categorie = (Categorie) entry.getValue();
+                for (PasswordEntity passwordEntity : categorie.getPasswords()) {
+                    insertPassword(categorie, passwordEntity);
+                }
+            }
+
         } catch (FileNotFoundException e) {
             // TODO
         }
+    }
+
+    public static void insertPassword(Categorie categorie, PasswordEntity passwordEntity) {
+        DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+        int index = 0;
+        for (int i=0; i<root.getChildCount(); i++) {
+            DefaultMutableTreeNode childNode = (DefaultMutableTreeNode) root.getChildAt(i);
+            Categorie nodeCategorie = (Categorie) childNode.getUserObject();
+            if (nodeCategorie.getName().equals(categorie.getName())) {
+                index = i;
+            }
+        }
+        DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(passwordEntity);
+        model.insertNodeInto(newNode, (DefaultMutableTreeNode) root.getChildAt(index), root.getChildAt(index).getChildCount());
+
+        tree.updateUI();
     }
 
     public JTree getTree() {

@@ -34,7 +34,7 @@ public class LoginFrame {
 
         JPanel dialogPanel = new JPanel(new BorderLayout());
 
-        JLabel welcomeLabel = new JLabel("Schön dich zu sehen! Gib bitte dein Masterpasswort ein um dich zu authentifizieren.");
+        JLabel welcomeLabel = new JLabel("   Schön dich zu sehen! Gib bitte dein Masterpasswort ein um dich zu authentifizieren.   ");
         dialogPanel.add(welcomeLabel, BorderLayout.NORTH);
 
         JPanel passwordPanel = new JPanel();
@@ -45,6 +45,7 @@ public class LoginFrame {
 
         JPanel buttonPanel = new JPanel();
         JButton loginButton = new JButton("Login");
+        loginButton.isDefaultButton();
         loginButton.addActionListener(new loginButtonActionListener());
         buttonPanel.add(loginButton);
 

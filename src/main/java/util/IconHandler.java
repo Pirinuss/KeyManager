@@ -45,6 +45,10 @@ public class IconHandler {
                 return (ImageIcon) getIcon("FinanceIcon2.png", 18,18);
             case TRAVEL:
                 return (ImageIcon) getIcon("PlaneIcon.png", 18,18);
+            case INTERNET_MOBILE:
+                return (ImageIcon) getIcon("InetMobile.png", 18,18);
+            case ADMINISTRATION:
+                return (ImageIcon) getIcon("Administration.png", 18,18);
         }
 
         return null;

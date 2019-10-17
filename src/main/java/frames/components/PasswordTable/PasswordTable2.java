@@ -5,6 +5,8 @@ import util.RoundedPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PasswordTable2 extends PasswordTable {
 
@@ -38,7 +40,7 @@ public class PasswordTable2 extends PasswordTable {
 
         for (int i=0; i<categorie.getPasswords().size(); i++) {
             RoundedPanel passwordPanel = new RoundedPanel();
-            passwordPanel.setPreferredSize(new Dimension(280,120));
+            passwordPanel.setPreferredSize(new Dimension(340,120));
             passwordPanel.setAlignmentX(100);
             addAttributes(passwordPanel, categorie, i);
             mainPanel.add(passwordPanel);
@@ -54,18 +56,31 @@ public class PasswordTable2 extends PasswordTable {
 
     private void addAttributes(JPanel passwordPanel, Categorie categorie, int index) {
 
+        passwordPanel.setLayout(new BorderLayout());
+
+        JPanel topPanel = new JPanel();
+        JPanel centerPanel = new JPanel();
+
         JPanel textLabelPanel = new JPanel();
-        JPanel valueLabelPanel = new JPanel();
-        textLabelPanel.setPreferredSize(new Dimension(110, 110));
-        valueLabelPanel.setPreferredSize(new Dimension(150,110));
+        JPanel valueLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        textLabelPanel.setPreferredSize(new Dimension(95, 70));
+        valueLabelPanel.setPreferredSize(new Dimension(190,70));
         textLabelPanel.setLayout(new BoxLayout(textLabelPanel, BoxLayout.Y_AXIS));
         valueLabelPanel.setLayout(new BoxLayout(valueLabelPanel, BoxLayout.Y_AXIS));
 
+        JPanel passwordFixerPanel = new JPanel(new GridLayout(1,1));
+
         if (colorFlag) {
+            passwordFixerPanel.setBackground(Color.MAGENTA);
+            topPanel.setBackground(Color.MAGENTA);
+            centerPanel.setBackground(Color.MAGENTA);
             textLabelPanel.setBackground(Color.MAGENTA);
             valueLabelPanel.setBackground(Color.MAGENTA);
             passwordPanel.setBackground(Color.MAGENTA);
         } else {
+            passwordFixerPanel.setBackground(new Color(0xFBACBE));
+            topPanel.setBackground(new Color(0xFBACBE));
+            centerPanel.setBackground(new Color(0xFBACBE));
             textLabelPanel.setBackground(new Color(0xFBACBE));
             valueLabelPanel.setBackground(new Color(0xFBACBE));
             passwordPanel.setBackground(new Color(0xFBACBE));
@@ -76,8 +91,9 @@ public class PasswordTable2 extends PasswordTable {
         JLabel titleLabel = new JLabel(categorie.getPasswords().get(index).getTitle());
         titleTextLabel.setForeground(new Color(0x1C304A));
         titleLabel.setForeground(new Color(0x1C304A));
-        textLabelPanel.add(titleTextLabel);
-        valueLabelPanel.add(titleLabel);
+        titleLabel.setFont(new Font("Times", Font.BOLD, 16));
+        //textLabelPanel.add(titleTextLabel);
+        topPanel.add(titleLabel);
 
         // Username
         JLabel userTextLabel = new JLabel("Nutzername: ");
@@ -88,16 +104,38 @@ public class PasswordTable2 extends PasswordTable {
         valueLabelPanel.add(userLabel);
 
         // Passwort
+        passwordFixerPanel.setPreferredSize(userLabel.getSize());
         JLabel passwordTextLabel = new JLabel("Passwort: ");
-        JLabel passwordLabel = new JLabel(categorie.getPasswords().get(index).getPassword());
+        final JPasswordField passwordLabel = new JPasswordField(categorie.getPasswords().get(index).getPassword());
         passwordTextLabel.setForeground(new Color(0x1C304A));
+        passwordLabel.setBackground(passwordFixerPanel.getBackground());
+        passwordLabel.setBorder(BorderFactory.createEmptyBorder());
         passwordLabel.setForeground(new Color(0x1C304A));
+        if (showPasswords) {
+            passwordLabel.putClientProperty("JPasswordField.cutCopyAllowed", true);
+            passwordLabel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    passwordLabel.setEchoChar((char) 0);
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    int dotUnicode = 9679;
+                    passwordLabel.setEchoChar((char) dotUnicode);
+                }
+            });
+        }
         textLabelPanel.add(passwordTextLabel);
-        valueLabelPanel.add(passwordLabel);
+        passwordFixerPanel.add(passwordLabel);
+        valueLabelPanel.add(passwordFixerPanel);
 
         // URL
         JLabel urlTextLabel = new JLabel("URL: ");
         JLabel urlLabel = new JLabel(categorie.getPasswords().get(index).getUrl());
+        if (urlLabel.getText().length() == 0) {
+            urlLabel.setText(" ");
+        }
         urlTextLabel.setForeground(new Color(0x1C304A));
         urlLabel.setForeground(new Color(0x1C304A));
         textLabelPanel.add(urlTextLabel);
@@ -106,12 +144,19 @@ public class PasswordTable2 extends PasswordTable {
         // Info
         JLabel infoTextLabel = new JLabel("Info: ");
         JLabel infoLabel = new JLabel(categorie.getPasswords().get(index).getInfo());
+        if (infoLabel.getText().length() == 0) {
+            infoLabel.setText(" ");
+        }
         infoTextLabel.setForeground(new Color(0x1C304A));
         infoLabel.setForeground(new Color(0x1C304A));
         textLabelPanel.add(infoTextLabel);
         valueLabelPanel.add(infoLabel);
-        passwordPanel.add(textLabelPanel);
-        passwordPanel.add(valueLabelPanel);
+
+        centerPanel.add(textLabelPanel);
+        centerPanel.add(valueLabelPanel);
+
+        passwordPanel.add(topPanel, BorderLayout.NORTH);
+        passwordPanel.add(centerPanel, BorderLayout.CENTER);
     }
 
 }

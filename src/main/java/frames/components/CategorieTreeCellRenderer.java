@@ -30,7 +30,9 @@ public class CategorieTreeCellRenderer implements TreeCellRenderer {
             }
 
         } else if (object instanceof PasswordEntity) {
-            renderedLabel = new JLabel("Passwort");
+            PasswordEntity password = (PasswordEntity) object;
+            renderedLabel = new JLabel(password.getTitle());
+            renderedLabel.setIcon(IconHandler.getIcon("Key.png",16,16));
         } else {
             renderedLabel = new JLabel("Kategorie");
         }

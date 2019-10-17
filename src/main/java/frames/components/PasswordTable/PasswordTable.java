@@ -2,6 +2,7 @@ package frames.components.PasswordTable;
 
 import listener.ContentFrameListener;
 import models.Categorie;
+import util.IconHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,10 @@ public abstract class PasswordTable extends JPanel {
     private static JPanel buttonPanel;
 
     private static JButton switchTableLayout;
+    private JButton enablePasswords;
+
+    public String lockIconName = "LockIcon1.png";
+    public boolean showPasswords;
 
     public PasswordTable() {
 
@@ -42,14 +47,20 @@ public abstract class PasswordTable extends JPanel {
         this.add(emptyLabel1, BorderLayout.WEST);
         this.add(emptyLabel2, BorderLayout.EAST);
         this.add(additionalPanels, BorderLayout.NORTH);
+
+        showPasswords = false;
     }
 
     private void createButtonPanel() {
         switchTableLayout = new JButton("Darstellung wechseln");
+        enablePasswords = new JButton(IconHandler.getIcon(lockIconName, 15,15));
+        enablePasswords.setText("Passwörter freischalten");
+        enablePasswords.addActionListener(new ContentFrameListener.LockPasswords());
         switchTableLayout.setBackground(new Color(0xF4E8C1));
         switchTableLayout.addActionListener(new ContentFrameListener.SwitchLayoutListener());
         switchTableLayout.setVisible(false);
         buttonPanel.add(switchTableLayout);
+        buttonPanel.add(enablePasswords);
     }
 
     public void initPasswordTableUpdate(Categorie categorie) {
@@ -63,13 +74,21 @@ public abstract class PasswordTable extends JPanel {
 
     public abstract void updatePasswordTable(Categorie categorie);
 
+    public boolean isShowPasswords() {
+        return showPasswords;
+    }
+
+    public void setShowPasswords(boolean showPasswords) {
+        this.showPasswords = showPasswords;
+    }
+
+    public void setLockIconName(String lockIconName) {
+        this.lockIconName = lockIconName;
+    }
+
     public void setDebugInfo(String message, int displayDuration, Color color) {
         Thread displayDebugThread = new Thread(new DebugThread(message, displayDuration, color));
         displayDebugThread.start();
-    }
-
-    public static JButton getSwitchTableLayout() {
-        return switchTableLayout;
     }
 
     private static class DebugThread implements Runnable {

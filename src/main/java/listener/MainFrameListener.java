@@ -4,6 +4,7 @@ import frames.components.CategorieTree;
 import frames.ContentFrame;
 import frames.MainFrame;
 import frames.components.PasswordGenerator;
+import frames.components.dialogs.NewCategorieDialog;
 import models.Categorie;
 import models.CategorieOption;
 import models.PasswordEntity;
@@ -54,21 +55,13 @@ public class MainFrameListener {
         private boolean create = false;
 
         public void actionPerformed(ActionEvent arg0) {
-
-            dialog = new JDialog();
-            dialog.setTitle("Kategorie erstellen");
-            dialog.setModal(true);
-            dialog.setSize(620,180);
-            dialog.setLocationRelativeTo(null);
-            dialog.add(createDialogPanel());
-            dialog.setResizable(false);
-            dialog.pack();
-            dialog.setVisible(true);
+        	
+        	NewCategorieDialog dialog = new NewCategorieDialog();
 
             if (create) {
                 Categorie categorie = new Categorie();
-                categorie.setName(newCatName.getText());
-                categorie.setCatOption(categorieOption);
+                categorie.setName(dialog.getNewCatName().getText());
+                categorie.setCatOption(dialog.getCategorieOption());
                 categorie.setId((int)System.currentTimeMillis());
                 catTree.addCategorie(categorie, categorie.getId());
                 JTree tree = catTree.getTree();
@@ -76,83 +69,9 @@ public class MainFrameListener {
                 logger.info("Kategorie angelegt: Name: \"" + newCatName.getText() + "\", Bereich: \"" + CategorieOption.toString(categorieOption) + "\"");
             }
         }
-
-        private JPanel createDialogPanel() {
-
-            JPanel mainPanel = new JPanel();
-
-            JPanel contentPanel = new JPanel();
-            contentPanel.setPreferredSize(new Dimension(400,150));
-            contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-
-            // Create namePanel
-            namePanel = new JPanel();
-            namePanel.add(new JLabel("Name der Kategorie:"));
-            newCatName = new JTextField(20);
-            namePanel.add(newCatName);
-            contentPanel.add(namePanel);
-
-            // Create boxPanel
-            JPanel boxPanel = new JPanel();
-            boxPanel.add(new JLabel("Bereich:"));
-            comboBox = new JComboBox(CategorieOption.getAllCatNames());
-            comboBox.setSelectedIndex(0);
-            boxPanel.add(comboBox);
-            contentPanel.add(boxPanel);
-
-            // Create validationPanel
-            JPanel validationPanel = new JPanel();
-            validationLabel = new JLabel(" ");
-            validationLabel.setForeground(Color.RED);
-            validationPanel.add(validationLabel);
-            contentPanel.add(validationPanel);
-
-            // Create buttonPanel
-            JPanel buttonPanel = new JPanel();
-            cancelButton = new JButton("Abbrechen");
-            cancelButton.addActionListener(new createCatButtonListener());
-            okayButton = new JButton("Erstellen");
-            okayButton.addActionListener(new createCatButtonListener());
-            dialog.getRootPane().setDefaultButton(okayButton);
-            buttonPanel.add(cancelButton);
-            buttonPanel.add(okayButton);
-            contentPanel.add(buttonPanel);
-
-            mainPanel.add(IconHandler.getIconPanel("AddIcon.png", 200,150));
-            mainPanel.add(contentPanel);
-
-            return mainPanel;
-        }
-
-        private class createCatButtonListener implements ActionListener {
-
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource()==cancelButton) {
-                    create = false;
-                } else {
-                    if (newCatName.getText().equals("")) {
-                        validationLabel.setText("Bitte einen Namen für die Kategorie angeben");
-                        validationLabel.setVisible(true);
-                        return;
-                    } else {
-                        ArrayList<String> existingCats = catTree.getCatNames();
-                        for (String catName : existingCats) {
-                            if (catName.equals(newCatName.getText())) {
-                                logger.warning("Fehler beim Erstellen einer Kategorie: Kategoriename \"" + newCatName.getText() + "\" ist bereits vergeben");
-                                validationLabel.setText("Eine Kategorie mit diesem Namen existiert bereits");
-                                validationLabel.setVisible(true);
-                                return;
-                            }
-                        }
-
-                    }
-
-                    String catOptionName = (String) comboBox.getSelectedItem();
-                    categorieOption = CategorieOption.fromString(catOptionName);
-                    create = true;
-                }
-                dialog.dispose();
-            }
+        
+        public void setValidationText(String text) {
+        	validationLabel.setText(text);
         }
 
     }
@@ -392,21 +311,8 @@ public class MainFrameListener {
 
                 categorie.addPassword(passwordEntity);
 
-                DefaultTreeModel model = (DefaultTreeModel) MainFrame.getCatTree().getTree().getModel();
-                DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
-                int index = 0;
-                for (int i=0; i<root.getChildCount(); i++) {
-                    DefaultMutableTreeNode childNode = (DefaultMutableTreeNode) root.getChildAt(i);
-                    Categorie nodeCategorie = (Categorie) childNode.getUserObject();
-                    if (nodeCategorie.getName().equals(categorieName)) {
-                        index = i;
-                    }
-                }
-                DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(passwordEntity);
-                model.insertNodeInto(newNode, (DefaultMutableTreeNode) root.getChildAt(index), root.getChildAt(index).getChildCount());
-
+                MainFrame.getCatTree().insertPassword(categorie, passwordEntity);
                 MainFrame.getContentPanel().updateCategoriePanel(categorie);
-                MainFrame.getCatTree().getTree().updateUI();
 
                 ContentFrame.getCategoriePanel().setDebugInfo("Neuer Passworteintrag angelegt!", 7000, Color.GREEN.darker());
                 logger.info("Neuer Passworteintrag für Kategorie \"" + categorieName
