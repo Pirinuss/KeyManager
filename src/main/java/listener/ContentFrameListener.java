@@ -1,8 +1,8 @@
 package listener;
 
-import frames.ContentFrame;
 import frames.MainFrame;
 import frames.components.CategoriePanel;
+import frames.components.ContentPanel;
 import frames.components.PasswordTable.PasswordTable;
 import frames.components.PasswordTable.PasswordTable1;
 import models.Categorie;
@@ -32,7 +32,7 @@ public class ContentFrameListener {
 
         public void actionPerformed(ActionEvent e) {
 
-            JTable table = ContentFrame.getCategoriePanel().getCategorieInfoTable();
+            JTable table = ContentPanel.getCategoriePanel().getCategorieInfoTable();
 
             table.setDefaultRenderer(Object.class, new CategoriePanel.EditCategorieTableRenderer());
             table.setDefaultEditor(Object.class, new CategoriePanel.CategorieTableEditor());
@@ -46,7 +46,7 @@ public class ContentFrameListener {
             editButton.removeActionListener(editButton.getActionListeners()[0]);
             editButton.addActionListener(new SaveCategorieTableListener(editButton));
 
-            JPanel buttonPanel = (JPanel) ContentFrame.getCategoriePanel().getComponent(2);
+            JPanel buttonPanel = (JPanel) ContentPanel.getCategoriePanel().getComponent(2);
             Component[] components = buttonPanel.getComponents();
             for (Component component : components) {
                 if (component.getName() != null) {
@@ -75,7 +75,7 @@ public class ContentFrameListener {
             CategoriePanel.getCategorieInfoTable().setDefaultRenderer(Object.class, new CategoriePanel.SaveCategorieTableRenderer());
             CategoriePanel.getCategorieInfoTable().updateUI();
 
-            Categorie categorie = MainFrame.getCatTree().getCategorieById(ContentFrame.getCategoriePanel().getCategorie().getId());
+            Categorie categorie = MainFrame.getCatTree().getCategorieById(ContentPanel.getCategoriePanel().getCategorie().getId());
             categorie.setName((String) CategoriePanel.getCategorieTableContent(0,1));
             categorie.setCatOption((CategorieOption.fromString((String) CategoriePanel.getCategorieTableContent(1,1))));
 
@@ -96,7 +96,7 @@ public class ContentFrameListener {
             saveButton.removeActionListener(saveButton.getActionListeners()[0]);
             saveButton.addActionListener(new EditCategorieTableListener(saveButton));
 
-            JPanel buttonPanel = (JPanel) ContentFrame.getCategoriePanel().getComponent(2);
+            JPanel buttonPanel = (JPanel) ContentPanel.getCategoriePanel().getComponent(2);
             Component[] components = buttonPanel.getComponents();
             for (Component component : components) {
                 if (component.getName() != null) {
@@ -107,7 +107,7 @@ public class ContentFrameListener {
             }
 
             logger.info("Kategorie \"" + categorie.getName() + "\" bearbeitet");
-            ContentFrame.getCategoriePanel().setDebugInfo("Kategorie erfolgreich editiert!", 5000, Color.GREEN.darker());
+            ContentPanel.getCategoriePanel().setDebugInfo("Kategorie erfolgreich editiert!", 5000, Color.GREEN.darker());
         }
     }
 
@@ -159,7 +159,7 @@ public class ContentFrameListener {
             tree.updateUI();
 
             logger.info("Passworteintrag \"" + selectedPassword.getTitle() + "\" in Kategorie \"" + currentCategorie.getName() + "\" gelöscht");
-            ContentFrame.getCategoriePanel().setDebugInfo("Passworteintrag erfolgreich gelöscht!", 5000, Color.GREEN.darker());
+            ContentPanel.getCategoriePanel().setDebugInfo("Passworteintrag erfolgreich gelöscht!", 5000, Color.GREEN.darker());
         }
     }
 
@@ -167,7 +167,7 @@ public class ContentFrameListener {
 
         public void actionPerformed(ActionEvent e) {
             logger.warning("Funktion funktioniert noch nicht");
-            ContentFrame.getCategoriePanel().setDebugInfo("Funktion noch nicht implementiert!", 3000, Color.RED);
+            ContentPanel.getCategoriePanel().setDebugInfo("Funktion noch nicht implementiert!", 3000, Color.RED);
         }
     }
 

@@ -1,7 +1,7 @@
 package listener;
 
 import frames.components.CategorieTree;
-import frames.ContentFrame;
+import frames.components.ContentPanel;
 import frames.MainFrame;
 import frames.components.PasswordGenerator;
 import frames.components.dialogs.NewCategorieDialog;
@@ -102,7 +102,7 @@ public class MainFrameListener {
             MainFrame.getCatTree().removeCategorie(catName);
             logger.info("Kategorie \"" + catName +"\" gelöscht");
 
-            ContentFrame.getLayout().first(ContentFrame.getMainPanel());
+            ContentPanel.getLayout().first(ContentPanel.getStartPanel());
 
         }
 
@@ -165,7 +165,7 @@ public class MainFrameListener {
             JLabel chooseCat = new JLabel("Kategorie:");
             chooseCatPanel.add(chooseCat);
             if (catIsKnown) {
-                categorieLabel = new JLabel(ContentFrame.getCategoriePanel().getCategorie().getName());
+                categorieLabel = new JLabel(ContentPanel.getCategoriePanel().getCategorie().getName());
                 chooseCatPanel.add(categorieLabel);
             } else {
                 chooseCatBox = new JComboBox(MainFrame.getCatTree().getCatNames().toArray());
@@ -314,7 +314,7 @@ public class MainFrameListener {
                 MainFrame.getCatTree().insertPassword(categorie, passwordEntity);
                 MainFrame.getContentPanel().updateCategoriePanel(categorie);
 
-                ContentFrame.getCategoriePanel().setDebugInfo("Neuer Passworteintrag angelegt!", 7000, Color.GREEN.darker());
+                ContentPanel.getCategoriePanel().setDebugInfo("Neuer Passworteintrag angelegt!", 7000, Color.GREEN.darker());
                 logger.info("Neuer Passworteintrag für Kategorie \"" + categorieName
                         + "\" angelegt:   Titel: \"" + passwordEntity.getTitle()
                         + "\",  Nutzername: \"" + passwordEntity.getUserName()

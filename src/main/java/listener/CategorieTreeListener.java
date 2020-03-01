@@ -1,7 +1,7 @@
 package listener;
 
-import frames.ContentFrame;
 import frames.MainFrame;
+import frames.components.ContentPanel;
 import models.Categorie;
 import models.PasswordEntity;
 

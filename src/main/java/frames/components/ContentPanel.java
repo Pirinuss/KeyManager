@@ -1,15 +1,12 @@
-package frames;
+package frames.components;
 
-import frames.components.CategoriePanel;
-import frames.components.PasswordGenerator;
-import frames.components.PasswordPanel;
 import models.Categorie;
 import models.PasswordEntity;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ContentFrame {
+public class ContentPanel {
 
     private static CardLayout layout = new CardLayout();
     private static JPanel mainPanel = new JPanel();
@@ -19,7 +16,7 @@ public class ContentFrame {
     private static JScrollPane logPanel;
     private static PasswordGenerator passwordGenerator;
 
-    public ContentFrame() {
+    public ContentPanel() {
 
         mainPanel.setLayout(layout);
         mainPanel.add(startPanel, "startPanel");
