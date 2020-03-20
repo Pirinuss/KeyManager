@@ -56,28 +56,9 @@ public class CategoriePanel extends JPanel {
         passwordTable = new PasswordTable2();
         passwordTable.setBackground(new Color(0x2F394D));
 
-        // Button Panel
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(new Color(0x2F394D));
-        JButton newPasswordButton = new JButton("Password hinzufügen");
-        newPasswordButton.setBackground(new Color(0xB0C1C4));
-        newPasswordButton.setName("newPasswordButton");
-        JButton editButton = new JButton("Bearbeiten");
-        editButton.setBackground(new Color(0xB0C1C4));
-        editButton.setName("editButton");
-        JButton deleteButton = new JButton("LÃ¶schen");
-        deleteButton.setBackground(new Color(0xB0C1C4));
-        deleteButton.setName("deleteButton");
-        deleteButton.addActionListener(new MainFrameListener.delCatListener());
-        editButton.addActionListener(new ContentFrameListener.EditCategorieTableListener(editButton));
-        newPasswordButton.addActionListener(new MainFrameListener.newPasListener(true));
-        buttonPanel.add(newPasswordButton);
-        buttonPanel.add(editButton);
-        buttonPanel.add(deleteButton);
-
         this.add(createCategorieTable(), BorderLayout.NORTH);
         this.add(passwordTable, BorderLayout.CENTER);
-        this.add(buttonPanel, BorderLayout.SOUTH);
+        this.add(createButtonPanel(), BorderLayout.SOUTH);
 
     }
 
@@ -118,11 +99,33 @@ public class CategoriePanel extends JPanel {
 
         categorieInfoTable.setValueAt("Name:", 0,0);
         categorieInfoTable.setValueAt("Bereich:", 1,0);
-        categorieInfoTable.setValueAt("Anzahl gespeicherter PasswÃ¶rter:", 2,0);
+        categorieInfoTable.setValueAt("Anzahl gespeicherter Passwörter:", 2,0);
         categorieInfoTable.setValueAt(" ", 3,0);
         categorieInfoTable.setValueAt(" ", 4,0);
-
+        
         return categorieInfoTable;
+    }
+    
+    private JPanel createButtonPanel() {
+    	JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(0x2F394D));
+        JButton newPasswordButton = new JButton("Password hinzufügen");
+        newPasswordButton.setBackground(new Color(0xB0C1C4));
+        newPasswordButton.setName("newPasswordButton");
+        JButton editButton = new JButton("Bearbeiten");
+        editButton.setBackground(new Color(0xB0C1C4));
+        editButton.setName("editButton");
+        JButton deleteButton = new JButton("Löschen");
+        deleteButton.setBackground(new Color(0xB0C1C4));
+        deleteButton.setName("deleteButton");
+        deleteButton.addActionListener(new MainFrameListener.delCatListener());
+        editButton.addActionListener(new ContentFrameListener.EditCategorieTableListener(editButton));
+        newPasswordButton.addActionListener(new MainFrameListener.newPasListener(true));
+        buttonPanel.add(newPasswordButton);
+        buttonPanel.add(editButton);
+        buttonPanel.add(deleteButton);
+        
+        return buttonPanel;
     }
 
     public void updateCategoriePanel(Categorie categorie) {

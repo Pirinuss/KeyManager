@@ -4,6 +4,7 @@ import frames.components.BottomBar;
 import frames.components.CategorieTree;
 import frames.components.ContentPanel;
 import frames.components.MenuBar;
+import frames.container.ContentPanelContainer;
 import util.MessageFactory;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ public class MainFrame {
 
 	private static JFrame frame = new JFrame();
 	private static Container container = new Container();
-	private static ContentPanel contentPanel = new ContentPanel();
+	private static ContentPanelContainer contentPanel = new ContentPanelContainer();
 	private static CategorieTree catTree = new CategorieTree();
 
 	public MainFrame() {
@@ -46,6 +47,6 @@ public class MainFrame {
 	}
 
 	public static ContentPanel getContentPanel() {
-		return contentPanel;
+		return ContentPanelContainer.getContentPanel();
 	}
 }

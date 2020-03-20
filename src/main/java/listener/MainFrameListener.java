@@ -64,13 +64,12 @@ public class MainFrameListener {
         private JLabel validationLabel;
 
         private CategorieOption categorieOption;
-        private boolean create = false;
 
         public void actionPerformed(ActionEvent arg0) {
         	
         	NewCategorieDialog dialog = new NewCategorieDialog();
 
-            if (create) {
+            if (dialog.isAccepted()) {
                 Categorie categorie = new Categorie();
                 categorie.setName(dialog.getNewCatName().getText());
                 categorie.setCatOption(dialog.getCategorieOption());
@@ -92,16 +91,16 @@ public class MainFrameListener {
         public void actionPerformed(ActionEvent e) {
             Object[] possibilities = new Object[catTree.getCatNames().size()];
             if (possibilities.length == 0) {
-                logger.warning("Fehler beim Kategorie LÃ¶schen: Es wurde noch keine Kategorie angelegt");
-                JOptionPane.showMessageDialog(container, "Es wurde noch keine Kategorie angelegt", "LÃ¶schen nicht mÃ¶glich", JOptionPane.WARNING_MESSAGE);
+                logger.warning("Fehler beim Kategorie Löschen: Es wurde noch keine Kategorie angelegt");
+                JOptionPane.showMessageDialog(container, "Es wurde noch keine Kategorie angelegt", "Löschen nicht möglich", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             for (int i = 0; i<catTree.getCatNames().size(); i++) {
                 possibilities[i] = catTree.getCatNames().get(i);
             }
             String catName = (String) JOptionPane.showInputDialog(container,
-                    "Welche Kategorie soll gelÃ¶scht werden?",
-                    "Kategorie lÃ¶schen",
+                    "Welche Kategorie soll gelöscht werden?",
+                    "Kategorie löschen",
                     JOptionPane.PLAIN_MESSAGE,
                     trashCanIcon,
                     possibilities,
@@ -111,7 +110,7 @@ public class MainFrameListener {
             }
 
             MainFrame.getCatTree().removeCategorie(catName);
-            logger.info("Kategorie \"" + catName +"\" gelÃ¶scht");
+            logger.info("Kategorie \"" + catName +"\" gelöscht");
 
             MainFrame.getContentPanel().switchToStartPanel();
 

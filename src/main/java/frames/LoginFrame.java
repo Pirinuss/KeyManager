@@ -45,7 +45,7 @@ public class LoginFrame {
 
         JPanel buttonPanel = new JPanel();
         JButton loginButton = new JButton("Login");
-        loginButton.isDefaultButton();
+        dialog.getRootPane().setDefaultButton(loginButton);
         loginButton.addActionListener(new loginButtonActionListener());
         buttonPanel.add(loginButton);
 

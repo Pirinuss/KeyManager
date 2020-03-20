@@ -18,6 +18,7 @@ public class ContentPanel extends JPanel {
     private static PasswordGenerator passwordGenerator;
 
     public ContentPanel() {
+        startPanel.setBackground(new Color(0x2F394D));
 
         this.setLayout(layout);
         this.add(startPanel, "startPanel");

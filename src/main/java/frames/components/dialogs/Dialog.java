@@ -21,6 +21,7 @@ public abstract class Dialog extends JDialog {
         this.setModal(true);
         this.setLocationRelativeTo(MainFrame.getFrame());
         this.setResizable(false);
+        this.pack();
         this.setVisible(true);
 	}
 	

@@ -24,10 +24,10 @@ public class MenuBar extends JMenuBar {
 		JMenuItem createCategorie = new JMenuItem("Kategorie erstellen");
 		createCategorie.addActionListener(new MainFrameListener.newCatListener());
 		newMenu.add(createCategorie);
-		JMenuItem deleteCategorie = new JMenuItem("Kategorie lÃ¶schen");
+		JMenuItem deleteCategorie = new JMenuItem("Kategorie löschen");
 		deleteCategorie.addActionListener(new MainFrameListener.delCatListener());
 		newMenu.add(deleteCategorie);
-		JMenuItem changeMainPassword = new JMenuItem("Masterpasswort Ã¤ndern (TODO)");
+		JMenuItem changeMainPassword = new JMenuItem("Masterpasswort Ändern (TODO)");
 		changeMainPassword.addActionListener(new MainFrameListener.changeMainPassListener());
 		newMenu.add(changeMainPassword);
 		newMenu.addSeparator();
@@ -36,7 +36,7 @@ public class MenuBar extends JMenuBar {
 		newMenu.add(createPassword);
 		JMenuItem editPassword = new JMenuItem("Passworteintrag bearbeiten (TODO)");
 		newMenu.add(editPassword);
-		JMenuItem deletePassword = new JMenuItem("Passworteintrag lÃ¶schen (TODO)");
+		JMenuItem deletePassword = new JMenuItem("Passworteintrag löschen (TODO)");
 		newMenu.add(deletePassword);
 		newMenu.addSeparator();
 		JMenuItem safe = new JMenuItem("Speichern");

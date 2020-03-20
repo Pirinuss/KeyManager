@@ -22,7 +22,6 @@ public class CategorieTree extends JTree {
 
 	private static final long serialVersionUID = -2643179724856700031L;
 
-	private DefaultMutableTreeNode root;
 	private HashMap<Integer, Categorie> categories;
 
 	public CategorieTree() {
@@ -95,6 +94,8 @@ public class CategorieTree extends JTree {
 	public void removeCategorie(String removeCategorieName) {
 
 		Categorie removeCategorie = getCategorieByName(removeCategorieName);
+		
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode) this.getModel().getRoot();
 
 		for (int i = 0; i < root.getChildCount(); i++) {
 			DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) root.getChildAt(i);

@@ -1,5 +1,6 @@
 package frames.components.dialogs;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -43,12 +44,11 @@ public class NewCategorieDialog extends Dialog {
 	protected JPanel createDialogPanel() {
 
 		JPanel dialogPanel = new JPanel();
+		dialogPanel.setLayout(new BorderLayout());
 		dialogPanel.setPreferredSize(new Dimension(DIALOGWIDTH, DIALOGHIGH));
-		dialogPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
 
 		JPanel contentPanel = new JPanel();
-		contentPanel.setPreferredSize(
-				new Dimension((DIALOGWIDTH / 3) * 2, (DIALOGHIGH / 6) * 5));
+		contentPanel.setPreferredSize(new Dimension((DIALOGWIDTH / 3) * 2, (DIALOGHIGH / 6) * 5));
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
 		// Create namePanel
@@ -84,8 +84,8 @@ public class NewCategorieDialog extends Dialog {
 		buttonPanel.add(okayButton);
 		contentPanel.add(buttonPanel);
 
-		dialogPanel.add(IconHandler.getIconPanel("AddIcon.png", 200, 150));
-		dialogPanel.add(contentPanel);
+		dialogPanel.add(IconHandler.getIconPanel("AddIcon.png", (DIALOGWIDTH / 3), (DIALOGHIGH / 6)), BorderLayout.WEST);
+		dialogPanel.add(contentPanel, BorderLayout.EAST);
 
 		return dialogPanel;
 	}
@@ -106,21 +106,16 @@ public class NewCategorieDialog extends Dialog {
 
 			if (pressedButton.getText().equals("Erstellen")) {
 				if (newCatName.getText().equals("")) {
-					validationLabel.setText(
-							"Bitte einen Namen für die Kategorie angeben");
+					validationLabel.setText("Bitte einen Namen für die Kategorie angeben");
 					validationLabel.setVisible(true);
 					return;
 				} else {
-					ArrayList<String> existingCats = MainFrame.getCatTree()
-							.getCatNames();
+					ArrayList<String> existingCats = MainFrame.getCatTree().getCatNames();
 					for (String catName : existingCats) {
 						if (catName.equals(newCatName.getText())) {
-							logger.warning(
-									"Fehler beim Erstellen einer Kategorie: Kategoriename \""
-											+ newCatName.getText()
-											+ "\" ist bereits vergeben");
-							validationLabel.setText(
-									"Eine Kategorie mit diesem Namen existiert bereits");
+							logger.warning("Fehler beim Erstellen einer Kategorie: Kategoriename \"" + newCatName.getText()
+									+ "\" ist bereits vergeben");
+							validationLabel.setText("Eine Kategorie mit diesem Namen existiert bereits");
 							validationLabel.setVisible(true);
 							return;
 						}

@@ -37,16 +37,12 @@ public abstract class PasswordTable extends JPanel {
         this.setBackground(new Color(0x2F394D));
         createButtonPanel();
 
-        JLabel emptyLabel1 = new JLabel("          ");
-        JLabel emptyLabel2 = new JLabel("          ");
-
         JPanel additionalPanels = new JPanel(new BorderLayout());
-        additionalPanels.add(debugPanel, BorderLayout.CENTER);
+        additionalPanels.setBackground(new Color(0x2F394D));
         additionalPanels.add(buttonPanel, BorderLayout.WEST);
 
-        this.add(emptyLabel1, BorderLayout.WEST);
-        this.add(emptyLabel2, BorderLayout.EAST);
         this.add(additionalPanels, BorderLayout.NORTH);
+        this.add(debugPanel, BorderLayout.SOUTH);
 
         showPasswords = false;
     }
@@ -54,7 +50,7 @@ public abstract class PasswordTable extends JPanel {
     private void createButtonPanel() {
         switchTableLayout = new JButton("Darstellung wechseln");
         enablePasswords = new JButton(IconHandler.getIcon(lockIconName, 15,15));
-        enablePasswords.setText("PasswÃ¶rter freischalten");
+        enablePasswords.setText("Passwörter freischalten");
         enablePasswords.addActionListener(new ContentFrameListener.LockPasswords());
         switchTableLayout.setBackground(new Color(0xF4E8C1));
         switchTableLayout.addActionListener(new ContentFrameListener.SwitchLayoutListener());
