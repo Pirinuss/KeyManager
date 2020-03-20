@@ -1,14 +1,13 @@
 package listener;
 
-import frames.MainFrame;
-import frames.components.ContentPanel;
-import models.Categorie;
-import models.PasswordEntity;
-
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
+
+import frames.MainFrame;
+import models.Categorie;
+import models.PasswordEntity;
 
 public class CategorieTreeListener implements TreeSelectionListener {
 

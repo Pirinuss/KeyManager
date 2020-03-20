@@ -1,5 +1,6 @@
 package util;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public class MessageFactory {
@@ -8,7 +9,7 @@ public class MessageFactory {
 	
 	private HashMap<String, String> messages = new HashMap<String, String>();
 	
-	public MessageFactory getMessageFactory() {
+	public static MessageFactory getMessageFactory() {
 		if (messageFactory == null) {
 			messageFactory = new MessageFactory();
 			initMessageFactory();
@@ -16,8 +17,17 @@ public class MessageFactory {
 		return messageFactory;
 	}
 
-	private void initMessageFactory() {
-		// TODO Auto-generated method stub
+	private static void initMessageFactory() {
+        try {
+			FileUtil.readMessages();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+
+	public void printMessages() {
+		System.out.println(messages);
 		
 	}
 

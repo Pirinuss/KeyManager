@@ -1,8 +1,42 @@
 package listener;
 
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.logging.Logger;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.SpringLayout;
+import javax.swing.text.Position;
+
+import com.google.gson.Gson;
+
+import frames.MainFrame;
 import frames.components.CategorieTree;
 import frames.components.ContentPanel;
-import frames.MainFrame;
 import frames.components.PasswordGenerator;
 import frames.components.dialogs.NewCategorieDialog;
 import models.Categorie;
@@ -11,26 +45,7 @@ import models.PasswordEntity;
 import util.FileUtil;
 import util.IconHandler;
 import util.LoggerUtil;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
-
-import javax.swing.*;
-import javax.swing.text.Position;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeCellRenderer;
-
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
+import util.MessageFactory;
 
 public class MainFrameListener {
 
@@ -46,10 +61,7 @@ public class MainFrameListener {
 
         private JDialog dialog;
         private JTextField newCatName;
-        private JComboBox comboBox;
         private JLabel validationLabel;
-        private JButton okayButton, cancelButton;
-        private JPanel namePanel;
 
         private CategorieOption categorieOption;
         private boolean create = false;
@@ -64,8 +76,7 @@ public class MainFrameListener {
                 categorie.setCatOption(dialog.getCategorieOption());
                 categorie.setId((int)System.currentTimeMillis());
                 catTree.addCategorie(categorie, categorie.getId());
-                JTree tree = catTree.getTree();
-                tree.expandPath(tree.getNextMatch(categorie.getName(),0, Position.Bias.Forward));
+                catTree.expandPath(catTree.getNextMatch(categorie.getName(),0, Position.Bias.Forward));
                 logger.info("Kategorie angelegt: Name: \"" + newCatName.getText() + "\", Bereich: \"" + CategorieOption.toString(categorieOption) + "\"");
             }
         }
@@ -102,7 +113,7 @@ public class MainFrameListener {
             MainFrame.getCatTree().removeCategorie(catName);
             logger.info("Kategorie \"" + catName +"\" gelöscht");
 
-            ContentPanel.getLayout().first(ContentPanel.getStartPanel());
+            MainFrame.getContentPanel().switchToStartPanel();
 
         }
 

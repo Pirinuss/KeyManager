@@ -6,6 +6,7 @@ import models.Categorie;
 
 import java.io.*;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class FileUtil {
@@ -64,6 +65,24 @@ public class FileUtil {
         }
 
         return categories;
+    }
+    
+    public static void readMessages() throws FileNotFoundException {
+        File file = new File(userDir + "/src/main/resources/messages.json");
+        if (!file.exists()) {
+            logger.severe("Fehler beim Laden der Daten: Datei wurde nicht gefunden");
+            throw new FileNotFoundException();
+        }
+        
+        try {
+            InputStreamReader in = new InputStreamReader(new FileInputStream(file), "UTF-8");
+
+            JsonReader reader = new JsonReader(in);
+            HashMap<String, String> messages = gson.fromJson(reader, HashMap.class);
+        } catch (UnsupportedEncodingException e) {
+            logger.severe("Fehler beim Laden der Daten: Fehlerhafter Zeichensatz");
+            e.printStackTrace();
+        }
     }
 
     private static void initDirectory(File file) {

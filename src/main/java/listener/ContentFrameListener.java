@@ -84,7 +84,7 @@ public class ContentFrameListener {
                 return;
             }
 
-            MainFrame.getCatTree().getTree().updateUI();
+            MainFrame.getCatTree().updateUI();
             for (int i=0; i<2; i++) {
                 CategoriePanel.TableModel model = (CategoriePanel.TableModel) CategoriePanel.getCategorieInfoTable().getModel();
                 model.setCellEditable(i,1, false);
@@ -137,7 +137,7 @@ public class ContentFrameListener {
             currentCategorie.removePassword(selectedPassword);
             MainFrame.getContentPanel().updateCategoriePanel(currentCategorie);
 
-            JTree tree = MainFrame.getCatTree().getTree();
+            JTree tree = MainFrame.getCatTree();
             DefaultTreeModel treeModel = (DefaultTreeModel) tree.getModel();
 
             TreePath path = tree.getNextMatch(currentCategorie.getName(), 0, Position.Bias.Forward);

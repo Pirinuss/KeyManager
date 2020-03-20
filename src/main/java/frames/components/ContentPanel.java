@@ -6,10 +6,11 @@ import models.PasswordEntity;
 import javax.swing.*;
 import java.awt.*;
 
-public class ContentPanel {
+public class ContentPanel extends JPanel {
 
-    private static CardLayout layout = new CardLayout();
-    private static JPanel mainPanel = new JPanel();
+	private static final long serialVersionUID = -8416385248212933496L;
+	
+	private CardLayout layout = new CardLayout();
     private static JPanel startPanel = new JPanel();
     private static CategoriePanel categoriePanel = new CategoriePanel(null);
     private static PasswordPanel passwordPanel = new PasswordPanel(null);
@@ -18,13 +19,10 @@ public class ContentPanel {
 
     public ContentPanel() {
 
-        mainPanel.setLayout(layout);
-        mainPanel.add(startPanel, "startPanel");
-        mainPanel.add(categoriePanel, "categoriePanel");
-        mainPanel.add(passwordPanel, "passwordPanel");
-
-        JLabel label = new JLabel("test");
-        mainPanel.add(label);
+        this.setLayout(layout);
+        this.add(startPanel, "startPanel");
+        this.add(categoriePanel, "categoriePanel");
+        this.add(passwordPanel, "passwordPanel");
     }
 
 
@@ -32,40 +30,36 @@ public class ContentPanel {
 
         categoriePanel.updateCategoriePanel(categorie);
 
-        layout.show(mainPanel, "categoriePanel");
+        layout.show(this, "categoriePanel");
         categoriePanel.updateUI();
     }
 
     public void updatePasswordPanel(PasswordEntity password) {
         passwordPanel.updatePasswordPanel(password);
 
-        layout.show(mainPanel, "passwordPanel");
+        layout.show(this, "passwordPanel");
         passwordPanel.updateUI();
     }
 
     public void showLogPanel(JScrollPane panel) {
 
         logPanel = panel;
-        mainPanel.add(logPanel, "logPanel");
+        this.add(logPanel, "logPanel");
 
-        layout.show(mainPanel, "logPanel");
+        layout.show(this, "logPanel");
         logPanel.updateUI();
     }
 
     public void showPasswordGeneratorPanel(PasswordGenerator panel) {
         passwordGenerator = panel;
-        mainPanel.add(panel, "passwordGeneratorPanel");
+        this.add(panel, "passwordGeneratorPanel");
 
-        layout.show(mainPanel, "passwordGeneratorPanel");
+        layout.show(this, "passwordGeneratorPanel");
         passwordGenerator.updateUI();
     }
-
-    public static JPanel getMainPanel() {
-        return mainPanel;
-    }
-
-    public static JPanel getStartPanel() {
-        return startPanel;
+    
+    public void switchToStartPanel() {
+    	layout.show(this, "startPanel");
     }
 
     public static CategoriePanel getCategoriePanel() {
@@ -74,10 +68,6 @@ public class ContentPanel {
 
     public static PasswordPanel getPasswordPanel() {
         return passwordPanel;
-    }
-
-    public static CardLayout getLayout() {
-        return layout;
     }
 
     public static PasswordGenerator getPasswordGenerator() {

@@ -4,7 +4,7 @@ import frames.components.BottomBar;
 import frames.components.CategorieTree;
 import frames.components.ContentPanel;
 import frames.components.MenuBar;
-import listener.MainFrameListener;
+import util.MessageFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,41 +17,20 @@ public class MainFrame {
 	private static CategorieTree catTree = new CategorieTree();
 
 	public MainFrame() {
-		buildFrame();
-	}
-
-	private void buildFrame() {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setSize(1400, 800);
 		frame.setVisible(true);
 		frame.setResizable(true);
+
 		container = frame.getContentPane();
 		container.setLayout(new BorderLayout());
 
-		/*
-		 * if (!checkOpeningPassword()) {
-		 * JOptionPane.showMessageDialog(container, "Zu viele Fehlversuche!\n" +
-		 * "Bitte wende dich an den Systemadministrator!"); }
-		 */
-
 		container.add(new MenuBar(), BorderLayout.NORTH);
-		createCategorieTree();
+		container.add(catTree, BorderLayout.WEST);
 		container.add(new BottomBar(), BorderLayout.SOUTH);
-		createContentFrame();
+		container.add(contentPanel, BorderLayout.CENTER);
 		frame.validate();
-	}
 
-	private void createCategorieTree() {
-		catTree.getTree()
-				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		catTree.getTree().setBackground(new Color(0xe6e6e6));
-		container.add(catTree.getTree(), BorderLayout.WEST);
-	}
-
-	private void createContentFrame() {
-		contentPanel.getMainPanel()
-				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		container.add(contentPanel.getMainPanel(), BorderLayout.CENTER);
 	}
 
 	public static Frame getFrame() {

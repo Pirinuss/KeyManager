@@ -1,5 +1,22 @@
 package frames.components;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.util.EventObject;
+
+import javax.swing.AbstractCellEditor;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+
 import frames.components.PasswordTable.PasswordTable;
 import frames.components.PasswordTable.PasswordTable1;
 import frames.components.PasswordTable.PasswordTable2;
@@ -7,20 +24,16 @@ import listener.ContentFrameListener;
 import listener.MainFrameListener;
 import models.Categorie;
 import models.CategorieOption;
-import util.LoggerUtil;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
-import java.awt.*;
-import java.util.EventObject;
-import java.util.logging.*;
 
 
 public class CategoriePanel extends JPanel {
 
-    private static Logger logger = LoggerUtil.getLogger();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2946566038991575683L;
+
+	//private static Logger logger = LoggerUtil.getLogger();
 
     private Categorie categorie;
 
@@ -46,7 +59,7 @@ public class CategoriePanel extends JPanel {
         // Button Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(0x2F394D));
-        JButton newPasswordButton = new JButton("Password hinzufÃ¼gen");
+        JButton newPasswordButton = new JButton("Password hinzufügen");
         newPasswordButton.setBackground(new Color(0xB0C1C4));
         newPasswordButton.setName("newPasswordButton");
         JButton editButton = new JButton("Bearbeiten");
@@ -143,7 +156,9 @@ public class CategoriePanel extends JPanel {
 
     public static class TableModel extends DefaultTableModel {
 
-        private boolean[][] editable_cells;
+		private static final long serialVersionUID = -7784451505151387366L;
+		
+		private boolean[][] editable_cells;
 
         public TableModel(int rows, int cols) {
             super(rows, cols);
@@ -171,7 +186,7 @@ public class CategoriePanel extends JPanel {
             }
 
             if (row == 1 && column == 1) {
-                JComboBox comboBox = new JComboBox(CategorieOption.getAllCatNames());
+                JComboBox<String> comboBox = new JComboBox<String>(CategorieOption.getAllCatNames());
                 comboBox.setSelectedItem(value);
                 return comboBox;
             }
@@ -196,15 +211,17 @@ public class CategoriePanel extends JPanel {
 
     public static class CategorieTableEditor extends AbstractCellEditor implements TableCellEditor {
 
-        Component component;
+		private static final long serialVersionUID = -6133433261399199992L;
+		
+		Component component;
         String value;
 
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 
             if (row == 1 && column == 1) {
-                component = new JComboBox(CategorieOption.getAllCatNames());
+                component = new JComboBox<String>(CategorieOption.getAllCatNames());
                 component.setName("comboBox");
-                JComboBox box = (JComboBox) component;
+                JComboBox<?> box = (JComboBox<?>) component;
                 value = box.getSelectedItem();
                 return component;
             }
@@ -235,7 +252,7 @@ public class CategoriePanel extends JPanel {
 
         public boolean stopCellEditing() {
             if (component.getName().equals("comboBox")) {
-                JComboBox comboBox = (JComboBox) component;
+                JComboBox<?> comboBox = (JComboBox<?>) component;
                 value = (String) comboBox.getSelectedItem();
             } else {
                 JTextField textField = (JTextField) component;

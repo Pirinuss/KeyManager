@@ -22,28 +22,21 @@ public class MenuBar extends JMenuBar {
 	private JMenu createNewMenu() {
 		JMenu newMenu = new JMenu("Bearbeiten");
 		JMenuItem createCategorie = new JMenuItem("Kategorie erstellen");
-		createCategorie
-				.addActionListener(new MainFrameListener.newCatListener());
+		createCategorie.addActionListener(new MainFrameListener.newCatListener());
 		newMenu.add(createCategorie);
 		JMenuItem deleteCategorie = new JMenuItem("Kategorie löschen");
-		deleteCategorie
-				.addActionListener(new MainFrameListener.delCatListener());
+		deleteCategorie.addActionListener(new MainFrameListener.delCatListener());
 		newMenu.add(deleteCategorie);
-		JMenuItem changeMainPassword = new JMenuItem(
-				"Masterpasswort ändern (TODO)");
-		changeMainPassword.addActionListener(
-				new MainFrameListener.changeMainPassListener());
+		JMenuItem changeMainPassword = new JMenuItem("Masterpasswort ändern (TODO)");
+		changeMainPassword.addActionListener(new MainFrameListener.changeMainPassListener());
 		newMenu.add(changeMainPassword);
 		newMenu.addSeparator();
 		JMenuItem createPassword = new JMenuItem("Passworteintrag erstellen");
-		createPassword
-				.addActionListener(new MainFrameListener.newPasListener(false));
+		createPassword.addActionListener(new MainFrameListener.newPasListener(false));
 		newMenu.add(createPassword);
-		JMenuItem editPassword = new JMenuItem(
-				"Passworteintrag bearbeiten (TODO)");
+		JMenuItem editPassword = new JMenuItem("Passworteintrag bearbeiten (TODO)");
 		newMenu.add(editPassword);
-		JMenuItem deletePassword = new JMenuItem(
-				"Passworteintrag löschen (TODO)");
+		JMenuItem deletePassword = new JMenuItem("Passworteintrag löschen (TODO)");
 		newMenu.add(deletePassword);
 		newMenu.addSeparator();
 		JMenuItem safe = new JMenuItem("Speichern");
@@ -57,17 +50,15 @@ public class MenuBar extends JMenuBar {
 		newMenu.add(exit);
 		return newMenu;
 	}
-	
+
 	private JMenu createViewMenu() {
 		JMenu viewMenu = new JMenu("Einstellungen");
-		JMenuItem configPasswordGenerator = new JMenuItem(
-				"Passwort Generator konfigurieren");
-		configPasswordGenerator.addActionListener(
-				new MainFrameListener.passwordGeneratorListener());
+		JMenuItem configPasswordGenerator = new JMenuItem("Passwort Generator konfigurieren");
+		configPasswordGenerator.addActionListener(new MainFrameListener.passwordGeneratorListener());
 		viewMenu.add(configPasswordGenerator);
 		return viewMenu;
 	}
-	
+
 	private JMenu createHelpMenu() {
 		JMenu helpMenu = new JMenu("Hilfe");
 		JMenuItem showLog = new JMenuItem("Log-Datei anzeigen");
