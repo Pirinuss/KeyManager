@@ -1,1 +1,1 @@
-[2020-03-20 10:56:51] [INFO   ] Start logging 
+[2020-04-12 10:29:41] [INFO   ] Start logging 

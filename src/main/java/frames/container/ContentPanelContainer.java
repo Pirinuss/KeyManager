@@ -17,8 +17,8 @@ public class ContentPanelContainer extends JPanel {
 	
 	public ContentPanelContainer() {
 		
-		JLabel bufferLabelWest = new JLabel();
-		bufferLabelWest.setPreferredSize(new Dimension(100, 100));
+		//JLabel bufferLabelWest = new JLabel();
+		//bufferLabelWest.setPreferredSize(new Dimension(100, 100));
 		
 		JLabel bufferLabelNorth = new JLabel();
 		bufferLabelNorth.setPreferredSize(new Dimension(100, 50));
@@ -29,7 +29,7 @@ public class ContentPanelContainer extends JPanel {
 		this.setLayout(new BorderLayout());
         this.setBackground(new Color(0x2F394D));
 		this.add(contentPanel, BorderLayout.CENTER);
-		this.add(bufferLabelWest, BorderLayout.WEST);
+		//this.add(bufferLabelWest, BorderLayout.WEST);
 		this.add(bufferLabelNorth, BorderLayout.NORTH);
 		this.add(bufferLabelSouth, BorderLayout.SOUTH);
 	}

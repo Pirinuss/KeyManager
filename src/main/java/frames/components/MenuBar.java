@@ -54,8 +54,11 @@ public class MenuBar extends JMenuBar {
 	private JMenu createViewMenu() {
 		JMenu viewMenu = new JMenu("Einstellungen");
 		JMenuItem configPasswordGenerator = new JMenuItem("Passwort Generator konfigurieren");
+		JMenuItem safetyCheck = new JMenuItem("Sicherheits-Check");
+		JMenuItem attackAnalysis = new JMenuItem("Angriffs Analyse");
 		configPasswordGenerator.addActionListener(new MainFrameListener.passwordGeneratorListener());
 		viewMenu.add(configPasswordGenerator);
+		viewMenu.add(safetyCheck);
 		return viewMenu;
 	}
 

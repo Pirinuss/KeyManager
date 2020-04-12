@@ -1,21 +1,30 @@
 package frames.components;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
 
 import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.UIManager;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class BottomBar extends JMenuBar {
+import frames.components.utils.BufferLabel;
+
+public class BottomBar extends JPanel {
 
 	private static final long serialVersionUID = -3515845024850462092L;
 	
 	public BottomBar() {
-		UIManager.put("MenuBar.background", Color.ORANGE);
-		JMenu test = new JMenu(" ");
-		this.add(test);
-		this.add(new JButton("Verbesserungsidee an Marc senden"));
+		this.setLayout(new BorderLayout());
+		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.add(new BufferLabel(10));
+		buttonPanel.add(new JButton("Verbesserungsidee an Marc senden"));
+		
+		JPanel copyrightPanel = new JPanel();
+		copyrightPanel.add(new JLabel("Copyright @ Marc Wendelborn 2019"));
+		copyrightPanel.add(new BufferLabel(5));
+		
+		this.add(buttonPanel, BorderLayout.WEST);
+		this.add(copyrightPanel, BorderLayout.EAST);
 	}
 
 }
