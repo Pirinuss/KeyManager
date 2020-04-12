@@ -1,10 +1,10 @@
 package listener;
 
-import frames.MainFrame;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+
+import frames.components.PasswordGenerator;
 
 public class PasswordGeneratorListener {
 
@@ -12,9 +12,11 @@ public class PasswordGeneratorListener {
 
         private String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!§$%&?ßÄÖÜäöü@€";
         private boolean supersave;
+        private PasswordGenerator passwordGenerator;
 
-        public GeneratePasswordListener(boolean supersave) {
+        public GeneratePasswordListener(boolean supersave, PasswordGenerator passwordGenerator) {
             this.supersave = supersave;
+            this.passwordGenerator = passwordGenerator;
         }
 
         public void actionPerformed(ActionEvent e) {
@@ -24,11 +26,11 @@ public class PasswordGeneratorListener {
             if (supersave) {
                 passwordLength = 32;
             } else {
-                passwordLength = MainFrame.getContentPanel().getPasswordGenerator().getPasswordLengthSlider().getValue();
+                passwordLength = passwordGenerator.getPasswordLengthSlider().getValue();
             }
 
-            boolean withSpecialChars = MainFrame.getContentPanel().getPasswordGenerator().getSpecialCharsCheckBox().isSelected();
-            boolean withNumbers = MainFrame.getContentPanel().getPasswordGenerator().getNumberCheckBox().isSelected();
+            boolean withSpecialChars = passwordGenerator.getSpecialCharsCheckBox().isSelected();
+            boolean withNumbers = passwordGenerator.getNumberCheckBox().isSelected();
 
             StringBuilder sb = new StringBuilder();
             Random random = new Random();
@@ -46,9 +48,9 @@ public class PasswordGeneratorListener {
                 sb.append(character);
             }
 
-            MainFrame.getContentPanel().getPasswordGenerator().getDisplayField().setVisible(true);
-            MainFrame.getContentPanel().getPasswordGenerator().getDisplayField().setText(sb.toString());
-            MainFrame.getContentPanel().getPasswordGenerator().getDisplayField().repaint();
+            passwordGenerator.getDisplayField().setVisible(true);
+            passwordGenerator.getDisplayField().setText(sb.toString());
+            passwordGenerator.getDisplayField().repaint();
         }
     }
 

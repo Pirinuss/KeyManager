@@ -9,14 +9,16 @@ import java.awt.*;
 
 public class PasswordGenerator extends JPanel {
 
-    private JSlider passwordLengthSlider;
+	private static final long serialVersionUID = 8600587597379978859L;
+	
+	private JSlider passwordLengthSlider;
     private JLabel displayLengthLabel;
     private JTextField displayField;
     private JCheckBox numberCheckBox;
     private JCheckBox specialCharsCheckBox;
 
     public PasswordGenerator() {
-        this.setBackground(new Color(0xe6e6e6));
+		this.setBackground(new Color(0x2F394D));
         initPasswordGeneratorPanel();
     }
 
@@ -49,9 +51,9 @@ public class PasswordGenerator extends JPanel {
         // Button
         JPanel buttonGroup = new JPanel();
         JButton generateButton = new JButton("Passwort generieren");
-        generateButton.addActionListener(new PasswordGeneratorListener.GeneratePasswordListener(false));
+        generateButton.addActionListener(new PasswordGeneratorListener.GeneratePasswordListener(false, this));
         JButton generateStrongButton = new JButton("Super sicheres Passwort generieren");
-        generateStrongButton.addActionListener(new PasswordGeneratorListener.GeneratePasswordListener(true));
+        generateStrongButton.addActionListener(new PasswordGeneratorListener.GeneratePasswordListener(true, this));
         buttonGroup.add(generateButton);
         buttonGroup.setBackground(new Color(0xe6e6e6));
         buttonGroup.add(generateStrongButton);

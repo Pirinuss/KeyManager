@@ -15,7 +15,8 @@ public class ContentPanel extends JPanel {
     private static CategoriePanel categoriePanel = new CategoriePanel(null);
     private static PasswordPanel passwordPanel = new PasswordPanel(null);
     private static JScrollPane logPanel;
-    private static PasswordGenerator passwordGenerator;
+    private PasswordGenerator passwordGenerator;
+    private AttackAnalysis attackAnalysis;
 
     public ContentPanel() {
         startPanel.setBackground(new Color(0x2F394D));
@@ -51,12 +52,24 @@ public class ContentPanel extends JPanel {
         logPanel.updateUI();
     }
 
-    public void showPasswordGeneratorPanel(PasswordGenerator panel) {
-        passwordGenerator = panel;
-        this.add(panel, "passwordGeneratorPanel");
+    public void showPasswordGeneratorPanel() {
+    	if(passwordGenerator == null) {
+    		passwordGenerator = new PasswordGenerator();
+            this.add(passwordGenerator, "passwordGeneratorPanel");
+    	}
 
         layout.show(this, "passwordGeneratorPanel");
         passwordGenerator.updateUI();
+    }
+    
+    public void showAttackAnalysisPanel() {
+    	if (attackAnalysis == null) {
+    		attackAnalysis = new AttackAnalysis();
+        	this.add(attackAnalysis, "attackAnalysisPanel");
+    	}
+    	
+    	layout.show(this, "attackAnalysisPanel");
+    	attackAnalysis.updateUI();
     }
     
     public void switchToStartPanel() {
@@ -69,9 +82,5 @@ public class ContentPanel extends JPanel {
 
     public static PasswordPanel getPasswordPanel() {
         return passwordPanel;
-    }
-
-    public static PasswordGenerator getPasswordGenerator() {
-        return passwordGenerator;
     }
 }

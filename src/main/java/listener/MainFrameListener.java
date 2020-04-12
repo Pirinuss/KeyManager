@@ -35,6 +35,7 @@ import javax.swing.text.Position;
 import com.google.gson.Gson;
 
 import frames.MainFrame;
+import frames.components.AttackAnalysis;
 import frames.components.CategorieTree;
 import frames.components.ContentPanel;
 import frames.components.PasswordGenerator;
@@ -408,14 +409,19 @@ public class MainFrameListener {
         }
     }
 
-    public static class passwordGeneratorListener implements  ActionListener {
+    public static class showPasswordGeneratorListener implements  ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-
-            PasswordGenerator passwordGeneratorPanel = new PasswordGenerator();
-
-            MainFrame.getContentPanel().showPasswordGeneratorPanel(passwordGeneratorPanel);
+            MainFrame.getContentPanel().showPasswordGeneratorPanel();
         }
+    }
+    
+    public static class showAttackAnalysisListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {			
+			MainFrame.getContentPanel().showAttackAnalysisPanel();
+		}
+    	
     }
 
     public static class safeListener implements ActionListener {
